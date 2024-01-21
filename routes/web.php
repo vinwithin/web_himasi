@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\regisController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/login', [loginController::class, 'index']);
 Route::post('/login', [loginController::class, 'login'])->middleware('throttle:login');
 Route::get('/register', [regisController::class, 'index']);
 Route::post('/register', [regisController::class, 'register']);
+Route::get('/', [HomeController::class, 'index']);
