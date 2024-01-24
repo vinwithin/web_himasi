@@ -35,23 +35,26 @@ class BeritaController extends Controller
     {
         return view("post_berita");
     }
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
             'title' => 'required',
             'body' => 'required|max:256',
-            'image' => 'image|mimes:png,jpg,jpeg|max:1024',
-            'category_id' => 'required',
+            'image_berita' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+            'category_berita_id' => 'required',
         ],
         [
             "title.required" => "Judul wajib diisi",
             "body.required" => "body harus diisi",
-            "image.required" => "image harus diisi",
-            "category_id.required" => "category harus diisi",
+            "image_berita.required" => "image harus diisi",
+            "category_berita_id.required" => "category harus diisi",
         ]);
-        $validateData["slug"] = Str::slug($request->title);
-        $imageName = time() . '_' . $request->image->getClientOriginalName();
-        $validateData['image'] = $imageName;
+        $validateData["user_id"] = auth()->user()->id;
+        $validateData["slug"] = Str::slug($request->title, '-');
+        $validateData["excerpt"] = Str::of($request->body)->limit(20);
+        $imageName = time() . '_' . $request->image_berita->getClientOriginalName();
+        $validateData['image_berita'] = $imageName;
         $result = Berita::create($validateData);
         //$imageName = $request->image_berita->getClientOriginalName();
         //$request->image_berita->storeAs('public', $imageName)
@@ -67,27 +70,6 @@ class BeritaController extends Controller
 
     public function upload(Request $request)
     {
-        if ($request->hasFile('file')) {
-            //get filename with extension
-            $filenamewithextension = $request->file('file')->getClientOriginalName();
-
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-
-            //get file extension
-            $extension = $request->file('file')->getClientOriginalExtension();
-
-            //filename to store
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
-
-            //Upload File
-            $request->file('file')->storeAs('public/uploads', $filenametostore);
-
-            // you can save image path below in database
-            $path = asset('storage/uploads/' . $filenametostore);
-
-            echo $path;
-            exit;
-        }
+       
     }
 }

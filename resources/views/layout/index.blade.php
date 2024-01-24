@@ -50,8 +50,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-
-                    @yield('createberita')
+                    @yield('dashboard')
+                    @yield('post_berita')
+                    @yield('post_artikel')
 
                     <div class="row">
 

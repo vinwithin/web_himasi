@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
@@ -25,5 +26,8 @@ Route::post('/login', [loginController::class, 'login'])->middleware('throttle:l
 Route::get('/register', [regisController::class, 'index']);
 Route::post('/register', [regisController::class, 'register']);
 Route::get('/', [HomeController::class, 'index']);
-Route::post('/post-berita', [BeritaController::class, 'store']);
-Route::post('/post-image', [BeritaController::class, 'upload'])->middleware(['api', 'cors']);
+Route::get('/berita', [BeritaController::class, 'index']);
+Route::post('/berita', [BeritaController::class, 'store']);
+Route::get('/artikel', [ArtikelController::class, 'index']);
+Route::post('/artikel', [ArtikelController::class, 'store']);
+//Route::post('/post-image', [BeritaController::class, 'upload'])->middleware(['api', 'cors']);

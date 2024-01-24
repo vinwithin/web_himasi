@@ -23,7 +23,7 @@ class loginController extends Controller
         ]);
         if(Auth::attempt($validateData)){
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with("success","Login Berhasil");
+            return redirect()->intended('/')->with("success","Login Berhasil");
         }
         return back()->with("error","Email atau Password Salah!");
     }
