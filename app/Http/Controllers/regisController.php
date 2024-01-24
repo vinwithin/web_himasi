@@ -16,7 +16,7 @@ class regisController extends Controller
             'name' => 'required',
             'username' => 'required',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|max:32|confirmed',
         ],[
             "name.required" => "nama wajib diisi",
             "username.required" => "username wajib diisi",

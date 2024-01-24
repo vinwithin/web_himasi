@@ -9,13 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>HIMASI ADMIN</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -120,17 +122,84 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <!-- Page level custom scripts -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    
+
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        (function() {
+            var HOST = "http://localhost:8000/post-image"; //pass the route
 
+            addEventListener("trix-attachment-add", function(event) {
+                if (event.attachment.file) {
+                    uploadFileAttachment(event.attachment)
+                }
+            })
+
+            function uploadFileAttachment(attachment) {
+                uploadFile(attachment.file, setProgress, setAttributes)
+
+                function setProgress(progress) {
+                    attachment.setUploadProgress(progress)
+                }
+
+                function setAttributes(attributes) {
+                    attachment.setAttributes(attributes)
+                }
+            }
+
+            function uploadFile(file, progressCallback, successCallback) {
+                var formData = createFormData(file);
+                var xhr = new XMLHttpRequest();
+
+                xhr.open("POST", HOST, true);
+                xhr.setRequestHeader('X-CSRF-TOKEN', getMeta('csrf-token'));
+                xhr.withCredentials = true;
+
+                xhr.upload.addEventListener("progress", function(event) {
+                    var progress = event.loaded / event.total * 100
+                    progressCallback(progress)
+                })
+
+                xhr.addEventListener("load", function(event) {
+                    var attributes = {
+                        url: xhr.responseText,
+                        href: xhr.responseText + "?content-disposition=attachment"
+                    }
+                    successCallback(attributes)
+                })
+
+                xhr.send(formData)
+            }
+
+            function createFormData(file) {
+                var data = new FormData()
+                data.append("Content-Type", file.type)
+                data.append("file", file)
+                return data
+            }
+
+            function getMeta(metaName) {
+                const metas = document.getElementsByTagName('meta');
+
+                for (let i = 0; i < metas.length; i++) {
+                    if (metas[i].getAttribute('name') === metaName) {
+                        return metas[i].getAttribute('content');
+                    }
+                }
+
+                return '';
+            }
+        })();
+    </script>
 </body>
 
 </html>
