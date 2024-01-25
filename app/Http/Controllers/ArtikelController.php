@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\Category_artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -10,7 +11,9 @@ class ArtikelController extends Controller
 {
     public function index()
     {
-        return view("post_artikel");
+        return view("post_artikel", [
+            'category_artikel' => Category_artikel::all(),
+        ]);
     }
 
     public function store(Request $request)

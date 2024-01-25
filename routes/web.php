@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\regisController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,6 @@ Route::get('/berita', [BeritaController::class, 'index']);
 Route::post('/berita', [BeritaController::class, 'store']);
 Route::get('/artikel', [ArtikelController::class, 'index']);
 Route::post('/artikel', [ArtikelController::class, 'store']);
+Route::get('/kegiatan', [KegiatanController::class, 'index']);
+Route::post('/kegiatan', [KegiatanController::class, 'store']);
 //Route::post('/post-image', [BeritaController::class, 'upload'])->middleware(['api', 'cors']);

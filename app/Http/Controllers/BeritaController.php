@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Category_berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -33,7 +34,10 @@ class BeritaController extends Controller
     }
     public function index()
     {
-        return view("post_berita");
+        return view('post_berita',[
+            'category_berita' => Category_berita::all(),
+            // 'transaksis' => transaksi::get()
+        ]);
     }
 
     public function store(Request $request)

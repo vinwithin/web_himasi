@@ -20,10 +20,11 @@
         <div class="mb-3">
         <label for="category_artikel_id" class="form-label">Kategori</label>
         <select class="form-select" name="category_artikel_id" id="category_artikel_id">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option>-- Pilih Kategori --</option>
+            @foreach ($category_artikel as $category)
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+            
           </select>
         </div>
         <div class="mb-3">
