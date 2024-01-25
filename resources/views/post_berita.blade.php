@@ -1,7 +1,7 @@
 @extends('layout/index')
 @section('post_berita')
 <h1>Buat Berita</h1>
-@if ($errors->any())
+{{-- @if ($errors->any())
 <div class="alert alert-danger">
     @foreach ($errors->all() as $error)
     <ul>
@@ -10,12 +10,17 @@
     </ul>
     @endforeach
 </div>
-@endif
+@endif --}}
     <form action="/berita" method="post" enctype="multipart/form-data">
       @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+            @error('title')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="mb-3">
         <label for="category_berita_id" class="form-label">Kategori</label>
@@ -28,13 +33,21 @@
           </select>
         </div>
         <div class="mb-3">
-        <label for="body" class="form-label">Isi Berita</label>
+        <label for="body" class="form-label">Deskripsi</label>
+        @error('body')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
         <input id="body" type="hidden" name="body">
         <trix-editor class="trix-content" input="body" ></trix-editor>
         </div>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" id="image_berita" name="image_berita">
-            <label class="input-group-text" for="iimage_berita">Upload</label>
+            <input type="file" class="form-control @error('image_berita') is-invalid @enderror" id="image_berita" name="image_berita">
+            <label class="input-group-text" for="image_berita">Upload</label>
+            @error('image_berita')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
           </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
