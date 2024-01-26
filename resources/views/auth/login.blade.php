@@ -8,28 +8,30 @@
   </head>
   <body>
     <div class="container fluid">
-    @if(session('success'))
-        <h1>{{session('success')}}</h1>
-    @endif
-    @if ($errors->any())
-      <div class="alert alert-danger">
-          @foreach ($errors->all() as $error)
-          <ul>
-              <li>{{ $error }}</li>
-              
-          </ul>
-          @endforeach
-      </div>
-    @endif
+      @if (session()->has('loginFailed'))
+          <div class="alert alert-danger">
+            {{ session('loginFailed') }}
+          </div>
+      @endif
     <form action="login" method="post">
       @csrf
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required value="{{ old('email') }}">
+          @error('email')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+          @error('password')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>

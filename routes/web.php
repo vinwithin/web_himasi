@@ -22,11 +22,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/login', [loginController::class, 'index']);
+Route::get('/login', [loginController::class, 'index'])->name('login');
 Route::post('/login', [loginController::class, 'login'])->middleware('throttle:login');
+Route::get('/logout', [loginController::class, 'logout']);
 Route::get('/register', [regisController::class, 'index']);
 Route::post('/register', [regisController::class, 'register']);
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::post('/berita', [BeritaController::class, 'store']);
 Route::get('/artikel', [ArtikelController::class, 'index']);

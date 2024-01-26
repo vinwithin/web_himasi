@@ -14,17 +14,17 @@ class loginController extends Controller
         $validateData = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required|min:6|max:32',
-        ],[
-            "email.required" => "alamat email wajib diisi",
-            "email.email:dns" => "format alamat email salah",
-            "password.required" => "password wajib diisi",
-            "password.min" => "password kurang dari 8 karakter",
-            "password.max" => "password lebih dari 32 karakter",
         ]);
         if(Auth::attempt($validateData)){
             $request->session()->regenerate();
             return redirect()->intended('/')->with("success","Login Berhasil");
         }
-        return back()->with("error","Email atau Password Salah!");
+        return back()->with('loginFailed', 'Gagal Login!');
+    }
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }
