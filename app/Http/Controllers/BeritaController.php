@@ -26,17 +26,9 @@ class BeritaController extends Controller
         
             $validateData = $request->validate([
                 'title' => 'required',
-                'body' => 'required|max:256',
+                'body' => 'required',
                 'image_berita' => 'required|image|mimes:png,jpg,jpeg|max:2024',
                 'category_berita_id' => 'required',
-            ],
-            [
-                "title.required" => "Judul wajib diisi",
-                "body.required" => "Deskripsi harus diisi",
-                "image_berita.required" => "Silakan unggah gambar",
-                "image_berita.image" => "Gambar harus berformat png, jpg, atau jpeg",
-                "image_berita.max" => "Ukuran gambar tidak boleh melebihi 2 mb",
-                "category_berita_id.required" => "category harus diisi",
             ]
         );
             $validateData["user_id"] = auth()->user()->id;

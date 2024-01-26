@@ -108,15 +108,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin untuk keluar?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Pilih "Keluar" dibawah ini jika kamu yakin untuk mengakhiri sesi ini.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -136,70 +136,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script>
-        (function() {
-            var HOST = "http://localhost:8000/post-image"; //pass the route
-
-            addEventListener("trix-attachment-add", function(event) {
-                if (event.attachment.file) {
-                    uploadFileAttachment(event.attachment)
-                }
-            })
-
-            function uploadFileAttachment(attachment) {
-                uploadFile(attachment.file, setProgress, setAttributes)
-
-                function setProgress(progress) {
-                    attachment.setUploadProgress(progress)
-                }
-
-                function setAttributes(attributes) {
-                    attachment.setAttributes(attributes)
-                }
-            }
-
-            function uploadFile(file, progressCallback, successCallback) {
-                var formData = createFormData(file);
-                var xhr = new XMLHttpRequest();
-
-                xhr.open("POST", HOST, true);
-                xhr.setRequestHeader('X-CSRF-TOKEN', getMeta('csrf-token'));
-                xhr.withCredentials = true;
-
-                xhr.upload.addEventListener("progress", function(event) {
-                    var progress = event.loaded / event.total * 100
-                    progressCallback(progress)
-                })
-
-                xhr.addEventListener("load", function(event) {
-                    var attributes = {
-                        url: xhr.responseText,
-                        href: xhr.responseText + "?content-disposition=attachment"
-                    }
-                    successCallback(attributes)
-                })
-
-                xhr.send(formData)
-            }
-
-            function createFormData(file) {
-                var data = new FormData()
-                data.append("Content-Type", file.type)
-                data.append("file", file)
-                return data
-            }
-
-            function getMeta(metaName) {
-                const metas = document.getElementsByTagName('meta');
-
-                for (let i = 0; i < metas.length; i++) {
-                    if (metas[i].getAttribute('name') === metaName) {
-                        return metas[i].getAttribute('content');
-                    }
-                }
-
-                return '';
-            }
-        })();
+        
     </script>
 </body>
 

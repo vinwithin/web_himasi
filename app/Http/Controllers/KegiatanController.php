@@ -16,15 +16,8 @@ class KegiatanController extends Controller
         
             $validateData = $request->validate([
                 'title' => 'required',
-                'body' => 'required|max:256',
+                'body' => 'required',
                 'image_kegiatan' => 'required|image|mimes:png,jpg,jpeg|max:2024',
-            ],
-            [
-                "title.required" => "Judul wajib diisi",
-                "body.required" => "Deskripsi harus diisi",
-                "image_kegiatan.required" => "Silahkan unggah gambar",
-                "image_berita.image" => "Gambar harus berformat png, jpg, atau jpeg",
-                "image_berita.max" => "Ukuran gambar tidak boleh melebihi 2 mb",
             ]);
             $validateData["user_id"] = auth()->user()->id;
             $validateData["slug"] = Str::slug($request->title, '-');

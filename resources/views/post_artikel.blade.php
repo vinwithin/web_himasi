@@ -5,7 +5,7 @@
       @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>
-            <input type="text" class="form-control @error('title') is-invalid  @enderror" id="title" name="title">
+            <input type="text" class="form-control @error('title') is-invalid  @enderror" id="title" name="title" required value="{{ old('title') }}">
             @error('title')
                 <div class="invalid-feedback">
                   {{ $message }}
@@ -14,8 +14,10 @@
         </div>
         <div class="mb-3">
         <label for="category_artikel_id" class="form-label">Kategori</label>
-        <select class="form-select" name="category_artikel_id" id="category_artikel_id">
-            <option>-- Pilih Kategori --</option>
+        @error('category_artikel_id')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+        <select class="form-select" name="category_artikel_id" id="category_artikel_id" required>
             @foreach ($category_artikel as $category)
               <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
@@ -26,7 +28,7 @@
         @error('body')
             <p class="text-danger">{{ $message }}</p>
         @enderror
-        <input id="body" type="hidden" name="body">
+        <input id="body" type="hidden" name="body" value="{{ old('body') }}">
         <trix-editor class="trix-content" input="body" ></trix-editor>
         </div>
         <div class="input-group mb-3">

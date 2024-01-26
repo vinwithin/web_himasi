@@ -21,17 +21,9 @@ class ArtikelController extends Controller
     {
             $validateData = $request->validate([
                 'title' => 'required',
-                'body' => 'required|max:256',
+                'body' => 'required',
                 'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
                 'category_artikel_id' => 'required',
-            ],
-            [
-                "title.required" => "Judul wajib diisi",
-                "body.required" => "Deskripsi harus diisi",
-                "image_artikel.required" => "Silakan unggah gambar",
-                "image_artikel.image" => "Gambar harus berformat png, jpg, atau jpeg",
-                "image_artikel.max" => "Ukuran gambar tidak boleh melebihi 2 mb",
-                "category_artikel_id.required" => "category harus diisi",
             ]);
             $validateData["user_id"] = auth()->user()->id;
             $validateData["slug"] = Str::slug($request->title, '-');
