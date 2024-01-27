@@ -1,17 +1,7 @@
 @extends('layout/index')
-@section('post_berita')
+@section('berita')
 <h1>Buat Berita</h1>
-{{-- @if ($errors->any())
-<div class="alert alert-danger">
-    @foreach ($errors->all() as $error)
-    <ul>
-        <li>{{ $error }}</li>
-        
-    </ul>
-    @endforeach
-</div>
-@endif --}}
-    <form action="/berita" method="post" enctype="multipart/form-data">
+    <form action="/store/berita" method="post" enctype="multipart/form-data">
       @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>

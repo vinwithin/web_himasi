@@ -27,12 +27,15 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::middleware('auth')->group(function (){
     Route::get('/', [HomeController::class, 'index']);
-    Route::get('/berita', [PostBeritaController::class, 'index']);
-    Route::post('/berita', [PostBeritaController::class, 'store']);
-    Route::get('/artikel', [PostArtikelController::class, 'index']);
-    Route::post('/artikel', [PostArtikelController::class, 'store']);
-    Route::get('/kegiatan', [PostKegiatanController::class, 'index']);
-    Route::post('/kegiatan', [PostKegiatanController::class, 'store']);
+    Route::get('/berita', [BeritaController::class, 'index']);
+    Route::get('/berita/create', [PostBeritaController::class, 'index']);
+    Route::post('/berita/create', [PostBeritaController::class, 'store']);
+    Route::get('/artikel', [ArtikelController::class, 'index']);
+    Route::get('/artikel/create', [PostArtikelController::class, 'index']);
+    Route::post('/artikel/create', [PostArtikelController::class, 'store']);
+    Route::get('/kegiatan', [KegiatanController::class, 'index']);
+    Route::get('/kegiatan/create', [PostKegiatanController::class, 'index']);
+    Route::post('/kegiatan/create', [PostKegiatanController::class, 'store']);
     Route::get('/logout', [loginController::class, 'logout']);
 });
 Route::middleware('guest')->group(function(){

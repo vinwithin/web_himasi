@@ -1,5 +1,5 @@
 @extends('layout/index')
-@section('post_berita')
+@section('kegiatan')
 <h1>Buat Kegiatan</h1>
     <form action="/kegiatan" method="post" enctype="multipart/form-data">
       @csrf
