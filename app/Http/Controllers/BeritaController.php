@@ -11,7 +11,7 @@ class BeritaController extends Controller
 {
     public function index(Request $request)
     {
-        $berita = Berita::all();
+        $berita = Berita::with(['category_berita'])->get();
         return view('admin.berita',[
             'berita' => $berita,
         ]);
@@ -19,8 +19,10 @@ class BeritaController extends Controller
     
 
 
-    public function upload(Request $request)
+    public function show(Berita $berita)
     {
-       
+        return view('admin/show/berita', [
+            'berita' => $berita->load('category_berita', 'user')]);  
+        
     }
 }

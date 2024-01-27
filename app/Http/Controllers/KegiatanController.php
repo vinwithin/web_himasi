@@ -15,4 +15,9 @@ class KegiatanController extends Controller
             'kegiatan' => $kegiatan,
         ]);
     }
+    public function show(Kegiatan $kegiatan)
+    {
+        return view('admin/show/kegiatan', ['kegiatan' => $kegiatan]);  
+        
+    }
 }

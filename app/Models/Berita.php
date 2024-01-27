@@ -22,7 +22,7 @@ class Berita extends Model
     public function category_berita(){
         return $this->belongsTo(Category_berita::class);
     }
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 }

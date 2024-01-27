@@ -26,7 +26,7 @@
                         <th>{{ $loop->iteration }}</th>
                         <td>{{ $post->title }}</td>
                         <td>
-                            <a href="" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
+                            <a href="kegiatan/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
                             <a href="" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a href="" class="badge bg-danger"><i class="fa-regular fa-trash"></i></a>
                         </td>

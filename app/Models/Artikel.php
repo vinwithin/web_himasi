@@ -22,7 +22,7 @@ class Artikel extends Model
     public function category_artikel(){
         return $this->belongsTo(Category_artikel::class);
     }
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 }

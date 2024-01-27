@@ -29,7 +29,7 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->category_artikel->name }}</td>
                         <td>
-                            <a href="" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
+                            <a href="artikel/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
                             <a href="" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a href="" class="badge bg-danger"><i class="fa-regular fa-trash"></i></a>
                         </td>

@@ -11,7 +11,7 @@ class PostBeritaController extends Controller
 {
     public function index()
     {
-        return view('admin.post_berita', [
+        return view('admin/post_berita', [
             'category_berita' => Category_berita::all(),
             // 'transaksis' => transaksi::get()
         ]);

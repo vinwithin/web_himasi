@@ -9,9 +9,14 @@ use Exception;
 class ArtikelController extends Controller
 {
     public function index(){
-        $artikel = Artikel::all();
+        $artikel = Artikel::with('category_artikel')->get();
         return view('admin/artikel',[
             'artikel' => $artikel,
+        ]);
+    }
+    public function show(Artikel $artikel){
+        return view('admin/show/artikel',[
+            'artikel' => $artikel->load('category_artikel', 'user'),
         ]);
     }
 }
