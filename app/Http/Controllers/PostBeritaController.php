@@ -30,7 +30,7 @@ class PostBeritaController extends Controller
         );
         $validateData["user_id"] = auth()->user()->id;
         $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] = Str::of($request->body)->limit(20);
+        $validateData["excerpt"] = Str::limit(strip_tags($request->body), 200);
         $imageName = time() . '_' . $request->image_berita->getClientOriginalName();
         $validateData['image_berita'] = $imageName;
         $result = Berita::create($validateData);
@@ -39,9 +39,9 @@ class PostBeritaController extends Controller
 
         if ($result) {
             $request->image_berita->storeAs('public', $imageName);
-            return "berhasil menambahkan berita";
+            return redirect('/berita')->with('success', 'berhasil menambahkan data');
         } else {
-            return "gagal menambahkan berita";
+            return redirect('/berita/create')->with("error", "Gagal menambahkan data!");
         }
     }
 }

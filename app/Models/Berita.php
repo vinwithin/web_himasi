@@ -19,4 +19,10 @@ class Berita extends Model
         'image_berita',
         'body',
     ];
+    public function category_berita(){
+        return $this->belongsTo(Category_berita::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

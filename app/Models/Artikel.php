@@ -19,4 +19,10 @@ class Artikel extends Model
         'image_artikel',
         'body',
     ];
+    public function category_artikel(){
+        return $this->belongsTo(Category_artikel::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

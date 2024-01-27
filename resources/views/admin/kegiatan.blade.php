@@ -1,35 +1,42 @@
 @extends('layout/index')
 @section('kegiatan')
-<div class="table-responsive">
-    <a href="kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    @if (session()->has('success'))
+        <div class="alert alert-primary" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    <div class="d-flex justify-content-between mb-3">
+        <h1 class=" text-dark fs-3">Kegiatan</h1>
+    </div>
+    <div class="card p-3 ">
+        <div class="table-responsive col-lg-6">
+            <a href="kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach ($kegiatan as $post)
+                    <tr>
+                        <th>{{ $loop->iteration }}</th>
+                        <td>{{ $post->title }}</td>
+                        <td>
+                            <a href="" class="badge bg-info"><span data-feather="eye"></span></a>
+                            <a href="" class="badge bg-warning"><span data-feather="eye"></span></a>
+                            <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 @endsection

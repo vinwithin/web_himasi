@@ -22,7 +22,7 @@ class PostKegiatanController extends Controller
         ]);
         $validateData["user_id"] = auth()->user()->id;
         $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] = Str::of($request->body)->limit(20);
+        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 200);
         $imageName = time() . '_' . $request->image_kegiatan->getClientOriginalName();
         $validateData['image_kegiatan'] = $imageName;
         $result = Kegiatan::create($validateData);
@@ -31,9 +31,9 @@ class PostKegiatanController extends Controller
 
         if ($result) {
             $request->image_kegiatan->storeAs('public', $imageName);
-            return "berhasil menambahkan kegiatan";
+            return redirect('/kegiatan')->with('success', 'berhasil menambahkan data');
         } else {
-            return "gagal menambahkan kegiatan";
+            return redirect('/kegiatan/create')->with("error", "Gagal menambahkan data!");
         }
     }
 }

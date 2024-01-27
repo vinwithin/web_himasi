@@ -13,4 +13,7 @@ class Category_artikel extends Model
         "name",
         "slug",
     ];
+    public function artikel(){
+        return $this->hasMany(Artikel::class);
+    }
 }

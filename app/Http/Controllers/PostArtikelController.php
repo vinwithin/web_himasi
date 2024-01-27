@@ -26,7 +26,7 @@ class PostArtikelController extends Controller
         ]);
         $validateData["user_id"] = auth()->user()->id;
         $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] = Str::of($request->body)->limit(20);
+        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 200);
         $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
         $validateData['image_artikel'] = $imageName;
         $result = Artikel::create($validateData);
@@ -35,9 +35,9 @@ class PostArtikelController extends Controller
 
         if ($result) {
             $request->image_artikel->storeAs('public', $imageName);
-            return "berhasil menambahkan artikel";
+            return redirect('/artikel')->with('success', 'berhasil menambahkan data');
         } else {
-            return "gagal menambahkan artikel";
+            return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
         }
     }
 }

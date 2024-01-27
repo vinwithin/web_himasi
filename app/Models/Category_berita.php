@@ -13,4 +13,7 @@ class Category_berita extends Model
         "name",
         "slug",
     ];
+    public function berita(){
+        return $this->hasMany(Berita::class);
+    }
 }
