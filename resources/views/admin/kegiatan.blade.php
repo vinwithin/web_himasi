@@ -11,7 +11,7 @@
     <div class="card p-3 ">
         <div class="table-responsive col-lg-6">
             <a href="kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
-            <table class="table table-bordered">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -26,9 +26,9 @@
                         <th>{{ $loop->iteration }}</th>
                         <td>{{ $post->title }}</td>
                         <td>
-                            <a href="" class="badge bg-info"><span data-feather="eye"></span></a>
-                            <a href="" class="badge bg-warning"><span data-feather="eye"></span></a>
-                            <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
+                            <a href="" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
+                            <a href="" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="" class="badge bg-danger"><i class="fa-regular fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

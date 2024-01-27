@@ -12,7 +12,7 @@
         <div class="table-responsive col-lg-8">
 
             <a href="artikel/create" class="btn btn-primary mb-3">Buat Artikel</a>
-            <table class="table table-bordered">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -29,9 +29,9 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->category_artikel->name }}</td>
                         <td>
-                            <a href="" class="badge bg-info"><span data-feather="eye"></span></a>
-                            <a href="" class="badge bg-warning"><span data-feather="eye"></span></a>
-                            <a href="" class="badge bg-danger"><span data-feather="eye"></span></a>
+                            <a href="" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
+                            <a href="" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="" class="badge bg-danger"><i class="fa-regular fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

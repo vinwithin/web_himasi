@@ -26,7 +26,7 @@ class PostArtikelController extends Controller
         ]);
         $validateData["user_id"] = auth()->user()->id;
         $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 200);
+        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
         $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
         $validateData['image_artikel'] = $imageName;
         $result = Artikel::create($validateData);

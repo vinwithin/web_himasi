@@ -6,13 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="HIMASI UNJA">
+    <meta name="author" content="Ristek HIMASI">
 
     <title>HIMASI ADMIN</title>
 
     <!-- Custom fonts for this template-->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -24,7 +23,11 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-
+    <style>
+         trix-toolbar [data-trix-button-group="file-tools"]{
+            display:none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -54,9 +57,9 @@
                     @yield('berita')
                     @yield('artikel')
                     @yield('kegiatan')
-                    
-                    
-                   
+
+
+
                     <div class="row">
 
 
@@ -138,8 +141,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://kit.fontawesome.com/f10456a175.js" crossorigin="anonymous"></script>
     <script>
-        
+        document.addEventListener('trix-file-accept', function(e){
+            e.preventDefault();
+        })
     </script>
 </body>
 

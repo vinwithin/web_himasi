@@ -7,12 +7,12 @@
         </div>
     @endif
     <div class="card p-4">
-        <form action="/store/berita" method="post" enctype="multipart/form-data">
+        <form action="/berita/create" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    required value="{{ old('title') }}">
+                    value="{{ old('title') }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -32,12 +32,12 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body" required value="{{ old('body') }}">
+                <input id="body" type="hidden" name="body" value="{{ old('body') }}">
                 <trix-editor class="trix-content" input="body"></trix-editor>
             </div>
             <div class="input-group mb-3">
                 <input type="file" class="form-control @error('image_berita') is-invalid @enderror" id="image_berita"
-                    name="image_berita" required>
+                    name="image_berita" >
                 <label class="input-group-text" for="image_berita">Upload</label>
                 @error('image_berita')
                     <div class="invalid-feedback">
