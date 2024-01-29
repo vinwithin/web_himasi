@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Exception;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cache;
 
 class BeritaController extends Controller
 {
     public function index(Request $request)
-    {
-        $berita = Berita::with(['category_berita'])->get();
+    {   
+        $berita = Berita::with(['category_berita'])->paginate(2);
+
         return view('admin.berita',[
             'berita' => $berita,
         ]);
@@ -25,4 +26,5 @@ class BeritaController extends Controller
             'berita' => $berita->load('category_berita', 'user')]);  
         
     }
+   
 }

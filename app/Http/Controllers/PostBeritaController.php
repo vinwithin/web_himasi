@@ -44,4 +44,14 @@ class PostBeritaController extends Controller
             return redirect('/berita/create')->with("error", "Gagal menambahkan data!");
         }
     }
+    public function destroy($id){
+        Berita::where('id', $id)->delete(); 
+        return redirect('/berita')->with('success', 'Berita Berhasil Dihapus!');
+    }
+    public function edit(string $id)
+    {
+        $berita = Berita::where('id',$id)->get();
+        $category_berita = Category_berita::all();
+	    return view('edit/berita_update',['berita' => $berita, 'category_berita' => $category_berita]);
+    }
 }

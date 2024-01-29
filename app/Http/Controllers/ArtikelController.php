@@ -9,7 +9,7 @@ use Exception;
 class ArtikelController extends Controller
 {
     public function index(){
-        $artikel = Artikel::with('category_artikel')->get();
+        $artikel = Artikel::with('category_artikel')->paginate(10);
         return view('admin/artikel',[
             'artikel' => $artikel,
         ]);
@@ -19,4 +19,5 @@ class ArtikelController extends Controller
             'artikel' => $artikel->load('category_artikel', 'user'),
         ]);
     }
+    
 }

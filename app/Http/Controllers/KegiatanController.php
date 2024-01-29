@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class KegiatanController extends Controller
 {
     public function index(){
-        $kegiatan = Kegiatan::all();
+        $kegiatan = Kegiatan::paginate(10);
         return view('admin/kegiatan',[
             'kegiatan' => $kegiatan,
         ]);
@@ -20,4 +20,5 @@ class KegiatanController extends Controller
         return view('admin/show/kegiatan', ['kegiatan' => $kegiatan]);  
         
     }
+    
 }

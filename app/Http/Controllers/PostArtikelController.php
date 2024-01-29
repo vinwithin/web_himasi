@@ -40,4 +40,14 @@ class PostArtikelController extends Controller
             return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
         }
     }
+    public function destroy($id){
+        Artikel::where('id', $id)->delete(); 
+        return redirect('/artikel')->with('success', 'Artikel Berhasil Dihapus!');
+    }
+    public function edit(string $id)
+    {
+        $artikel= Artikel::where('id',$id)->get();
+        $category_artikel = Category_artikel::all();
+	    return view('edit/artikel_update',['artikel' => $artikel, 'category_artikel' => $category_artikel]);
+    }
 }

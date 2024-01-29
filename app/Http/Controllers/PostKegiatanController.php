@@ -36,4 +36,13 @@ class PostKegiatanController extends Controller
             return redirect('/kegiatan/create')->with("error", "Gagal menambahkan data!");
         }
     }
+    public function destroy($id){
+        Kegiatan::where('id', $id)->delete(); 
+        return redirect('/kegiatan')->with('success', 'Kegiatan Berhasil Dihapus!');
+    }
+    public function edit(string $id)
+    {
+        $kegiatan= Kegiatan::where('id',$id)->get();
+	    return view('edit/kegiatan_update',['kegiatan' => $kegiatan]);
+    }
 }
