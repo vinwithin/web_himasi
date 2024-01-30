@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Artikel;
 use App\Models\Category_artikel;
+use Exception;
 use Illuminate\Support\Str;
 
 class PostArtikelController extends Controller
@@ -29,24 +30,25 @@ class PostArtikelController extends Controller
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
         $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
         $validateData['image_artikel'] = $imageName;
-        $result = Artikel::create($validateData);
-        //$imageName = $request->image_berita->getClientOriginalName();
-        //$request->image_berita->storeAs('public', $imageName)
 
-        if ($result) {
-            $request->image_artikel->storeAs('public', $imageName);
-            return redirect('/artikel')->with('success', 'berhasil menambahkan data');
-        } else {
-            return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
-        }
+        try{
+            $result = Artikel::create($validateData);
+            if ($result) {
+                $request->image_artikel->storeAs('public', $imageName);
+                return redirect('/artikel')->with('success', 'berhasil menambahkan data');
+            } else {
+                return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
+            }
+        }catch(Exception $e){
+        return redirect()->to('artikel')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
+        };
     }
     public function destroy($id){
         Artikel::where('id', $id)->delete(); 
         return redirect('/artikel')->with('success', 'Artikel Berhasil Dihapus!');
     }
-    public function edit(string $id)
+    public function edit(Artikel $artikel)
     {
-        $artikel= Artikel::where('id',$id)->get();
         $category_artikel = Category_artikel::all();
 	    return view('edit/artikel_update',['artikel' => $artikel, 'category_artikel' => $category_artikel]);
     }

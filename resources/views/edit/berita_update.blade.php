@@ -12,7 +12,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    value={{ $berita->first()->title }}>
+                    value={{ $berita->title }}>
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -23,7 +23,11 @@
                 <label for="category_berita_id" class="form-label">Kategori</label>
                 <select class="form-select" name="category_berita_id" id="category_berita_id" required>
                     @foreach ($category_berita as $category)
+                    @if ($berita->category_berita_id == $category->id)
+                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                    @else
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -32,7 +36,7 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body" value={{ $berita->first()->body }}>
+                <input id="body" type="hidden" name="body" value={{ $berita->body }}>
                 <trix-editor class="trix-content" input="body"></trix-editor>
             </div>
             <div class="input-group mb-3">

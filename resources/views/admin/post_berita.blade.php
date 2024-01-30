@@ -22,6 +22,7 @@
             <div class="mb-3">
                 <label for="category_berita_id" class="form-label">Kategori</label>
                 <select class="form-select" name="category_berita_id" id="category_berita_id" required>
+                    <option value="" selected="selected" hidden="hidden">Pilih Kategori</option>
                     @foreach ($category_berita as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

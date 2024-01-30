@@ -5,6 +5,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if (session()->has("slugerror"))
+        <div class="alert alert-danger" role="alert">
+            {{ session('slugerror') }}
+        </div>
+    @endif
     <div class="d-flex justify-content-between mb-3">
         <h1 class=" text-dark fs-3">Berita</h1>
     </div>
@@ -29,7 +34,7 @@
                             <td>{{ $post->category_berita->name }}</td>
                             <td>
                                 <a href="berita/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
-                                <a href="berita/edit/{{$post->id}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="berita/edit/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <a href="" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-trash"></i></a>
                                 {{-- Modal hapus --}}
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

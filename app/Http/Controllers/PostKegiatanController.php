@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Kegiatan;
+use Exception;
 
 class PostKegiatanController extends Controller
 {
@@ -25,24 +26,24 @@ class PostKegiatanController extends Controller
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
         $imageName = time() . '_' . $request->image_kegiatan->getClientOriginalName();
         $validateData['image_kegiatan'] = $imageName;
-        $result = Kegiatan::create($validateData);
-        //$imageName = $request->image_berita->getClientOriginalName();
-        //$request->image_berita->storeAs('public', $imageName)
-
-        if ($result) {
-            $request->image_kegiatan->storeAs('public', $imageName);
-            return redirect('/kegiatan')->with('success', 'berhasil menambahkan data');
-        } else {
-            return redirect('/kegiatan/create')->with("error", "Gagal menambahkan data!");
-        }
+        try{
+            $result = Kegiatan::create($validateData);
+            if ($result) {
+                $request->image_kegiatan->storeAs('public', $imageName);
+                return redirect('/kegiatan')->with('success', 'berhasil menambahkan data');
+            } else {
+                return redirect('/kegiatan/create')->with("error", "Gagal menambahkan data!");
+            }
+        }catch(Exception $e){
+            return redirect()->to('kegiatan')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
+        };
     }
     public function destroy($id){
         Kegiatan::where('id', $id)->delete(); 
         return redirect('/kegiatan')->with('success', 'Kegiatan Berhasil Dihapus!');
     }
-    public function edit(string $id)
+    public function edit(Kegiatan $kegiatan)
     {
-        $kegiatan= Kegiatan::where('id',$id)->get();
 	    return view('edit/kegiatan_update',['kegiatan' => $kegiatan]);
     }
 }

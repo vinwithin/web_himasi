@@ -25,6 +25,7 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
                 <select class="form-select" name="category_artikel_id" id="category_artikel_id" required>
+                    <option value="" selected="selected" hidden="hidden">Pilih Kategori</option>
                     @foreach ($category_artikel as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

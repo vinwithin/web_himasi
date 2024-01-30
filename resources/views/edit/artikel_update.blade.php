@@ -12,7 +12,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
                 <input type="text" class="form-control @error('title') is-invalid  @enderror" id="title"
-                    name="title" value="{{ $artikel->first()->title }}">
+                    name="title" value="{{ $artikel->title }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -26,7 +26,12 @@
                 @enderror
                 <select class="form-select" name="category_artikel_id" id="category_artikel_id" required>
                     @foreach ($category_artikel as $category)
+                    @if ($artikel->category_artikel_id == $category->id)
+                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                    @else
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endif
+                       
                     @endforeach
                 </select>
             </div>
@@ -35,7 +40,7 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body" value="{{ $artikel->first()->body }}">
+                <input id="body" type="hidden" name="body" value="{{ $artikel->body }}">
                 <trix-editor class="trix-content" input="body"></trix-editor>
             </div>
             <div class="input-group mb-3">
