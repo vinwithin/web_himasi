@@ -13,8 +13,21 @@
     <div class="d-flex mb-3">
         <h1 class=" text-dark fs-3">Artikel</h1>
     </div>
-    <div class="card p-3">
-        <div class="table-responsive col-lg-8">
+    <div class="d-flex card p-3">
+        
+        <form class="form-inline mr-auto w-100 navbar-search justify-content-center">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+      
+        <div class="table-responsive col-lg-8 justify-content-start">
 
             <a href="artikel/create" class="btn btn-primary mb-3">Buat Artikel</a>
             @if (count($artikel) > 0)
@@ -37,12 +50,12 @@
                         <td>
                             <a href="artikel/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
                             <a href="artikel/edit/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-trash"></i></a>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <a href="/artikel/delete/{{$post->slug}}" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-regular fa-trash"></i></a>
+                            <div class="modal fade" id="exampleModal{{$post->slug}}" tabindex="1" aria-labelledby="exampleModalLabel{{$post->slug}}" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi</h1>
+                                      <h1 class="modal-title fs-5" id="exampleModalLabel{{$post->slug}}">Konfirmasi</h1>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -50,7 +63,7 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                                      <a href="/artikel/delete/{{$post->id}}" class="btn btn-primary">Iya</a>
+                                      <a href="/artikel/delete/{{$post->slug}}" class="btn btn-primary">Iya</a>
                                     </div>
                                   </div>
                                 </div>
@@ -65,7 +78,9 @@
                 {{ $artikel->links() }}
             </div>
             @else 
-                <p>no data</p>
+            <div class="alert alert-light" role="alert">
+                Tidak ada data!
+              </div>
             @endif
         </div>
         

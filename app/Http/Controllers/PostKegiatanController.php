@@ -38,8 +38,8 @@ class PostKegiatanController extends Controller
             return redirect()->to('kegiatan')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         };
     }
-    public function destroy($id){
-        Kegiatan::where('id', $id)->delete(); 
+    public function destroy(Kegiatan $kegiatan){
+        Kegiatan::where('id', $kegiatan->id)->delete(); 
         return redirect('/kegiatan')->with('success', 'Kegiatan Berhasil Dihapus!');
     }
     public function edit(Kegiatan $kegiatan)

@@ -51,8 +51,8 @@ class PostBeritaController extends Controller
             return redirect()->to('berita')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         };
     }
-    public function destroy($id){
-        Berita::where('id', $id)->delete(); 
+    public function destroy(Berita $berita){
+        Berita::where('id', $berita->id)->delete(); 
         return redirect('/berita')->with('success', 'Berita Berhasil Dihapus!');
     }
     public function edit(Berita $berita)

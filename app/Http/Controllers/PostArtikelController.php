@@ -43,8 +43,8 @@ class PostArtikelController extends Controller
         return redirect()->to('artikel')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         };
     }
-    public function destroy($id){
-        Artikel::where('id', $id)->delete(); 
+    public function destroy(Artikel $artikel){
+        Artikel::where('id', $artikel->id)->delete(); 
         return redirect('/artikel')->with('success', 'Artikel Berhasil Dihapus!');
     }
     public function edit(Artikel $artikel)
