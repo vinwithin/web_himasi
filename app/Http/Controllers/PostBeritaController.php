@@ -60,4 +60,25 @@ class PostBeritaController extends Controller
         $category_berita = Category_berita::all();
 	    return view('edit/berita_update',['berita' => $berita, 'category_berita' => $category_berita]);
     }
+    public function update(Request $request, Berita $berita){
+        $validateData = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'image_berita' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+            'category_berita_id' => 'required',
+        ]);
+        $validateData["slug"] = Str::slug($request->title, '-');
+        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+        $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
+        $validateData['image_berita'] = $imageName;
+
+        $result = Berita::where('id', $berita->id)
+                  ->update($validateData);
+        if ($result) {
+            $request->image_artikel->storeAs('public', $imageName);
+            return redirect('/berita')->with('success', 'berhasil mengubah data');
+        } else {
+            return redirect('/berita/create')->with("error", "Gagal mengubah data!");
+        }
+    }
 }

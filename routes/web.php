@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/berita/create', [PostBeritaController::class, 'store']);
     Route::get('/berita/delete/{id}', [PostBeritaController::class, 'destroy']);
     Route::get('/berita/edit/{berita:slug}', [PostBeritaController::class, 'edit']);
+    Route::post('/berita/update/{berita:slug}', [PostBeritaController::class, 'update']);
 
     Route::get('/artikel', [ArtikelController::class, 'index']);
     Route::get('/artikel/detail/{artikel:slug}', [ArtikelController::class, 'show']);
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/artikel/create', [PostArtikelController::class, 'store']);
     Route::post('/artikel/delete/{id}', [PostArtikelController::class, 'destroy']);
     Route::get('/artikel/edit/{artikel:slug}', [PostArtikelController::class, 'edit']);
+    Route::post('/artikel/update/{artikel:slug}', [PostArtikelController::class, 'update']);
 
     Route::get('/kegiatan', [KegiatanController::class, 'index']);
     Route::get('/kegiatan/detail/{kegiatan:slug}', [KegiatanController::class, 'show']);
@@ -51,6 +53,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/kegiatan/create', [PostKegiatanController::class, 'store']);
     Route::post('/kegiatan/delete/{id}', [PostKegiatanController::class, 'destroy']);
     Route::get('/kegiatan/edit/{kegiatan:slug}', [PostKegiatanController::class, 'edit']);
+    Route::post('/kegiatan/update/{kegiatan:slug}', [PostKegiatanController::class, 'update']);
 
     Route::get('/logout', [loginController::class, 'logout']);
 });

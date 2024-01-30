@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="card p-4">
-        <form action="/berita/create" method="post" enctype="multipart/form-data">
+        <form action="/berita/update/{{$berita->slug}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>

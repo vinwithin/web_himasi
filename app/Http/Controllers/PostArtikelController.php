@@ -52,4 +52,25 @@ class PostArtikelController extends Controller
         $category_artikel = Category_artikel::all();
 	    return view('edit/artikel_update',['artikel' => $artikel, 'category_artikel' => $category_artikel]);
     }
+    public function update(Request $request, Artikel $artikel){
+        $validateData = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+            'category_artikel_id' => 'required',
+        ]);
+        $validateData["slug"] = Str::slug($request->title, '-');
+        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+        $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
+        $validateData['image_artikel'] = $imageName;
+
+        $result = Artikel::where('id', $artikel->id)
+                  ->update($validateData);
+        if ($result) {
+            $request->image_artikel->storeAs('public', $imageName);
+            return redirect('/artikel')->with('success', 'berhasil mengubah data');
+        } else {
+            return redirect('/artikel/create')->with("error", "Gagal mengubah data!");
+        }
+    }
 }
