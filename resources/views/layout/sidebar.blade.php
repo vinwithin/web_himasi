@@ -25,15 +25,15 @@
     <div class="sidebar-heading">
         Menu
     </div>
-    <li class="nav-item  {{ Request::is('berita*') ? 'active' : ''}}">
-        <a class="nav-link" href="/berita">
-            <i class="fa-regular fa-newspaper"></i>
-            <span>Berita</span></a>
-    </li>
     <li class="nav-item  {{ Request::is('artikel*') ? 'active' : ''}}">
         <a class="nav-link" href="/artikel">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Artikel</span></a>
+    </li>
+    <li class="nav-item  {{ Request::is('berita*') ? 'active' : ''}}">
+        <a class="nav-link" href="/berita">
+            <i class="fa-regular fa-newspaper"></i>
+            <span>Berita</span></a>
     </li>
     <li class="nav-item  {{ Request::is('kegiatan*') ? 'active' : ''}}">
         <a class="nav-link" href="/kegiatan">

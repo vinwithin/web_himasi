@@ -19,7 +19,7 @@ class loginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/')->with("success","Login Berhasil");
         }
-        return back()->with('loginFailed', 'Gagal Login!');
+        return back()->with('loginFailed', 'Email dan Password salah!');
     }
     public function logout(Request $request) {
         Auth::logout();
