@@ -40,21 +40,23 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body" value="{{ $artikel->body }}">
-                <trix-editor class="trix-content" input="body"></trix-editor>
-            </div>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control @error('image_artikel') is-invalid @enderror" id="image_artikel"
-                    name="image_artikel">
-                <label class="input-group-text" for="image_artikel">Upload</label>
-                @error('image_artikel')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                <textarea name="body" id="editor">{{$artikel->body}}</textarea>
             </div>
             <a href="/artikel" class="btn btn-warning mt-2">Back</a>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ),
+            {
+                ckfinder:{
+                    uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+                }
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

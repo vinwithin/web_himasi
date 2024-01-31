@@ -20,5 +20,14 @@ class KegiatanController extends Controller
         return view('admin/show/kegiatan', ['kegiatan' => $kegiatan]);  
         
     }
+
+    public function search(Request $request){
+        $cari = $request->cari;
+        $kegiatan = Kegiatan::where('title','like',"%".$cari."%")->paginate(10);
+		return view('admin/kegiatan',[
+            'kegiatan' => $kegiatan,
+        ]);
+		
+    }
     
 }

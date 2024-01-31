@@ -15,7 +15,20 @@
     </div>
     <div class="card p-3 ">
         <div class="table-responsive col-lg-6">
-            <a href="kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
+            <a href="/kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
+
+            <form action="/kegiatan/search" method="get" class="form-inline mr-auto w-100 navbar-search justify-content-end mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Cari..."
+                        name="cari">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             @if (count($kegiatan) > 0)
             <table class="table table-striped table-hover">
                 <thead>

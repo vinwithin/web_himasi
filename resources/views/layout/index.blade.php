@@ -27,6 +27,9 @@
          trix-toolbar [data-trix-button-group="file-tools"]{
             display:none;
         }
+        .ck-editor__editable_inline{
+            height: 450px;
+        }
     </style>
 </head>
 

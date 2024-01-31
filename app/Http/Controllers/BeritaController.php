@@ -26,5 +26,14 @@ class BeritaController extends Controller
             'berita' => $berita->load('category_berita', 'user')]);  
         
     }
+
+    public function search(Request $request){
+        $cari = $request->cari;
+        $berita = Berita::where('title','like',"%".$cari."%")->with('category_berita')->paginate(10);
+		return view('admin/berita',[
+            'berita' => $berita,
+        ]);
+		
+    }
    
 }

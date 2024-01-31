@@ -11,8 +11,8 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                     value="{{ old('title') }}">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                    name="title" value="{{ old('title') }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -25,21 +25,29 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-                <trix-editor class="trix-content" input="body"></trix-editor>
+                <textarea name="body" id="editor"></textarea>
             </div>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control @error('image_kegiatan') is-invalid  @enderror"
-                    id="image_kegiatan" name="image_kegiatan" >
-                <label class="input-group-text" for="image_kegiatan">Upload</label>
-                @error('image_kegiatan')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
+
             <a href="/kegiatan" class="btn btn-warning mt-2">Back</a>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), 
+            )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    <script>
+       CKEDITOR.replace('editor', options)
+    </script>
 @endsection
