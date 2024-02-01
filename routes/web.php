@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/berita/delete/{berita:slug}', [PostBeritaController::class, 'destroy']);
     Route::get('/berita/edit/{berita:slug}', [PostBeritaController::class, 'edit']);
     Route::post('/berita/update/{berita:slug}', [PostBeritaController::class, 'update']);
+});
 
-    
+Route::middleware('auth')->group(function (){
     Route::get('/artike', [ArtikelController::class, 'check']);
     Route::get('/artikel', [ArtikelController::class, 'index']);
     Route::get('/artikel/search', [ArtikelController::class, 'search']);
@@ -50,11 +51,14 @@ Route::middleware('auth')->group(function (){
     Route::get('/artikel/delete/{artikel:slug}', [PostArtikelController::class, 'destroy']);
     Route::get('/artikel/edit/{artikel:slug}', [PostArtikelController::class, 'edit']);
     Route::post('/artikel/update/{artikel:slug}', [PostArtikelController::class, 'update']);
+});
 
+Route::middleware('auth')->group(function (){
     Route::get('/kegiatan', [KegiatanController::class, 'index']);
     Route::get('/kegiatan/search', [KegiatanController::class, 'search']);
     Route::get('/kegiatan/detail/{kegiatan:slug}', [KegiatanController::class, 'show']);
 
+    Route::post('/kegiatan/upload', [PostKegiatanController::class, 'upload'])->name('ckeditor.kegiatan.upload');
     Route::get('/kegiatan/create', [PostKegiatanController::class, 'index']);
     Route::post('/kegiatan/create', [PostKegiatanController::class, 'store']);
     Route::get('/kegiatan/delete/{kegiatan:slug}', [PostKegiatanController::class, 'destroy']);
@@ -63,6 +67,7 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/logout', [loginController::class, 'logout']);
 });
+
 
 
 

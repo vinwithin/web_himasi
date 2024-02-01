@@ -20,15 +20,12 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+    {{-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script> --}}
 
     <style>
-         trix-toolbar [data-trix-button-group="file-tools"]{
-            display:none;
-        }
         .ck-editor__editable_inline{
-            height: 450px;
+            height: 500px;
         }
     </style>
 </head>
@@ -145,11 +142,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="https://kit.fontawesome.com/f10456a175.js" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('trix-file-accept', function(e){
-            e.preventDefault();
-        })
-    </script>
+    
 </body>
 
 </html>

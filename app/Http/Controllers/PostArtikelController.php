@@ -37,12 +37,12 @@ class PostArtikelController extends Controller
             $result = Artikel::create($validateData);
             if ($result) {
                 // $request->image_artikel->storeAs('public', $imageName);
-                return redirect('/artikel')->with('success', 'berhasil menambahkan data');
+                return redirect('/artikel')->with('success', 'Berhasil menambahkan data');
             } else {
                 return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
             }
         }catch(Exception $e){
-            return redirect()->to('berita')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
+            return redirect()->to('artikel')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         }
       
     }
@@ -57,34 +57,30 @@ class PostArtikelController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $imageName = $imageName . time() . '.' . $extension;
             // $request->file('upload')->move(public_path('media'), $imageName);
-            $request->file('upload')->storeAs('public/media', $imageName);
-            $url = asset('storage/media/' . $imageName);
+            $request->file('upload')->storeAs('public/media/artikel', $imageName);
+            $url = asset('storage/media/artikel/' . $imageName);
             return response()->json(['fileName' => $imageName, 'uploaded' => 1, "url" => $url]);
         }
     }
 
     public function destroy(Artikel $artikel){
         $firstRow = Artikel::select('body')->find($artikel->id);
-
         $imageTags = [];
-
-
         if ($firstRow) {
             // Use regular expression to extract img tags
             preg_match_all('/storage[^>]+(png|jpg|jpeg)/i', $firstRow->body, $matches);
 
             // Add extracted img tags to the array
             $imageTags = $matches[0];
-        }
+            if(count($imageTags) > 0){
+                foreach ($imageTags as $tag) {
 
-        foreach ($imageTags as $tag) {
-                // Delete the file
-                unlink($tag);
-            
+                        // Delete the file
+                    unlink($tag);
+                }
+            }
         }
-        
         Artikel::where('id', $artikel->id)->delete(); 
-      
         return redirect('/artikel')->with('success', 'Artikel Berhasil Dihapus!');
     }
 
@@ -93,6 +89,7 @@ class PostArtikelController extends Controller
         $category_artikel = Category_artikel::all();
 	    return view('edit/artikel_update',['artikel' => $artikel, 'category_artikel' => $category_artikel]);
     }
+
     public function update(Request $request, Artikel $artikel){
         $validateData = $request->validate([
             'title' => 'required',
@@ -101,12 +98,16 @@ class PostArtikelController extends Controller
         ]);
         $validateData["slug"] = Str::slug($request->title, '-');
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        $result = Artikel::where('id', $artikel->id)
-                  ->update($validateData);
-        if ($result) {
-            return redirect('/artikel')->with('success', 'berhasil mengubah data');
-        } else {
-            return redirect('/artikel/create')->with("error", "Gagal mengubah data!");
+        try{
+            $result = Artikel::where('id', $artikel->id)
+                    ->update($validateData);
+            if ($result) {
+                return redirect('/artikel')->with('success', 'Berhasil mengubah data');
+            } else {
+                return redirect('/artikel/create')->with("error", "Gagal mengubah data!");
+            }
+        }catch(Exception $e){
+            return redirect()->to('artikel')->with("slugerror", "Gagal mengubah data! masukkan judul yang lain!");
         }
     }
 

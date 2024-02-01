@@ -34,20 +34,15 @@
     </div>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script>
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
-        };
         ClassicEditor
-            .create( document.querySelector( '#editor' ), 
-            )
+            .create( document.querySelector( '#editor' ),
+            {
+                ckfinder:{
+                    uploadUrl: "{{ route('ckeditor.kegiatan.upload', ['_token' => csrf_token() ]) }}",
+                }
+            } )
             .catch( error => {
                 console.error( error );
             } );
-    </script>
-    <script>
-       CKEDITOR.replace('editor', options)
     </script>
 @endsection
