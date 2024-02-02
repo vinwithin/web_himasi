@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/berita/search', [BeritaController::class, 'search']);
     Route::get('/berita/detail/{berita:slug}', [BeritaController::class, 'show']);
 
+    Route::post('/berita/upload', [PostBeritaController::class, 'upload'])->name('ckeditor.berita.upload');
     Route::get('/berita/create', [PostBeritaController::class, 'index']);
     Route::post('/berita/create', [PostBeritaController::class, 'store']);
     Route::get('/berita/delete/{berita:slug}', [PostBeritaController::class, 'destroy']);

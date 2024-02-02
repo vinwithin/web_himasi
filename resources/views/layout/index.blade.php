@@ -24,9 +24,16 @@
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script> --}}
 
     <style>
-        .ck-editor__editable_inline{
+        .ck-editor__editable_inline {
             height: 500px;
         }
+
+       .image{
+        text-align: center;
+       }
+       p{
+        text-align: justify;
+       }
     </style>
 </head>
 
@@ -50,7 +57,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid text-dark ">
 
                     <!-- Page Heading -->
                     @yield('dashboard')
@@ -142,7 +149,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="https://kit.fontawesome.com/f10456a175.js" crossorigin="anonymous"></script>
-    
+
 </body>
 
 </html>

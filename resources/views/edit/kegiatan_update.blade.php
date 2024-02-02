@@ -12,7 +12,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                     value="{{ $kegiatan->first()->title }}">
+                     value="{{ $kegiatan->title }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}

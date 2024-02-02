@@ -52,6 +52,14 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <div class="sidebar-heading">
+       Other
+    </div>
+    <li class="nav-item ">
+        <a class="nav-link" href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span></a>
+    </li>
     
 
 
