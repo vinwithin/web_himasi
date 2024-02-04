@@ -37,24 +37,15 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
                 {{-- <input id="body" type="hidden" name="body" value="{{ old('body') }}"> --}}
-               <textarea name="body" id="editor" ></textarea>
+                <textarea name="body" id="editor"></textarea>
             </div>
-            
+
             <a href="/artikel" class="btn btn-warning mt-2">Back</a>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ),
-            {
-                ckfinder:{
-                    uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
-                }
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
+
+    <script src="/js/ckeditor.js"></script>
 @endsection

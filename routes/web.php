@@ -47,7 +47,6 @@ Route::middleware('auth')->group(function (){
     Route::get('/artikel/detail/{artikel:slug}', [ArtikelController::class, 'show']);
 
     Route::get('/artikel/create', [PostArtikelController::class, 'index']);
-    Route::post('/artikel/upload', [PostArtikelController::class, 'upload'])->name('ckeditor.upload');
     Route::post('/artikel/create', [PostArtikelController::class, 'store']);
     Route::get('/artikel/delete/{artikel:slug}', [PostArtikelController::class, 'destroy']);
     Route::get('/artikel/edit/{artikel:slug}', [PostArtikelController::class, 'edit']);

@@ -11,6 +11,8 @@
 
     <title>HIMASI ADMIN</title>
 
+    <link rel="icon" href="/img/cropped-logo.png" type="image/gif">
+
     <!-- Custom fonts for this template-->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -20,20 +22,31 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script> --}}
+
 
     <style>
         .ck-editor__editable_inline {
             height: 500px;
         }
 
-       .image{
-        text-align: center;
-       }
-       p{
-        text-align: justify;
-       }
+       
+         .image.image_resized img {
+           
+            max-width: 100%;
+            text-align: center;
+            
+        }
+
+      
+
+        .image {
+            text-align: center;
+            margin: auto;
+        }
+
+        p {
+            text-align: justify;
+        }
     </style>
 </head>
 

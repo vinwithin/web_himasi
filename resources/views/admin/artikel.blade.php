@@ -1,7 +1,7 @@
 @extends('layout/index')
 @section('artikel')
     @if (session()->has('success'))
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif

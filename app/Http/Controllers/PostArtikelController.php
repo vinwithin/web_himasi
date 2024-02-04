@@ -19,17 +19,36 @@ class PostArtikelController extends Controller
         ]);
     }
 
+   
+
     public function store(Request $request)
     {
+        $imageTags = [];
         $validateData = $request->validate([
             'title' => 'required',
             'body' => 'required',
             // 'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
             'category_artikel_id' => 'required',
         ]);
+       
         $validateData["user_id"] = auth()->user()->id;
         $validateData["slug"] = Str::slug($request->title, '-');
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+        $imageTags = $matches[0];
+        if (count($imageTags) > 0){
+            foreach ($imageTags as $tagImage) {
+                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                $imageName = Str::random(10). '.' . $extension;
+                Storage::disk('public')->put('media/artikel/'.$imageName, base64_decode($image) );
+                // $path = base64_decode($image);
+                // $path->store('public/media/artikel', $imageName);
+                $validateData['body'] = str_replace($tagImage,  '/storage/media/artikel/' .$imageName, $validateData['body']);
+            }
+        }
+         // simpan data ke database
+        
         // $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
         // $validateData['image_artikel'] = $imageName;
         try{
@@ -46,22 +65,7 @@ class PostArtikelController extends Controller
         }
       
     }
-    public function upload(Request $request){
-        $request->validate([
-            'upload' => 'required|image|mimes:png,jpg,jpeg|max:2024',
-        ]);
-        if($request->hasFile('upload')){
-            
-            $originName = $request->file('upload')->getClientOriginalName();
-            $imageName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $imageName = $imageName . time() . '.' . $extension;
-            // $request->file('upload')->move(public_path('media'), $imageName);
-            $request->file('upload')->storeAs('public/media/artikel', $imageName);
-            $url = asset('storage/media/artikel/' . $imageName);
-            return response()->json(['fileName' => $imageName, 'uploaded' => 1, "url" => $url]);
-        }
-    }
+   
 
     public function destroy(Artikel $artikel){
         $firstRow = Artikel::select('body')->find($artikel->id);
