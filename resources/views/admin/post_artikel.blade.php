@@ -6,7 +6,7 @@
             {{ session('error') }}
         </div>
     @endif
-    <div class="card p-4">
+    <div class="card p-4 shadow">
         <form action="/artikel/create" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">

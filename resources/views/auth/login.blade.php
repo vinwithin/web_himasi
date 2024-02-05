@@ -21,7 +21,7 @@
 
 <body>
 
-    <section class="vh-100 bg-primary">
+    <section class="vh-100 bg-info">
        
         <div class="container py-5 h-100">
           @if (session()->has('loginFailed'))
@@ -29,7 +29,7 @@
             {{session('loginFailed')}}
           </div>
           @endif
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row d-flex  justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">

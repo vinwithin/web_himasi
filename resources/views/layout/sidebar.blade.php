@@ -1,9 +1,9 @@
-<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion static-top shadow" id="accordionSidebar">
+<ul class="navbar-nav bg-primary sidebar-primary text-light sidebar accordion shadow-lg" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center text-light" href="#">
+        <div class="sidebar-brand-icon ">
+            <i class="fa-solid fa-user-tie"></i>
         </div>
         <div class="sidebar-brand-text mx-2">HIMASI ADMIN</div>
     </a>
@@ -12,55 +12,46 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item  {{ Request::is('/') ? 'active' : ''}}">
-        <a class="nav-link " href="/">
-            <i class="fa-solid fa-user-tie"></i>
-            <span>Dashboard</span></a>
+    <li class="nav-item  {{ Request::is('/') ? 'active' : '' }}">
+        <a class="nav-link" href="/" style="font-family: 'Times New Roman', Times, serif;">
+            <i class="fa-solid fa-house"></i>
+            <span class="fs-6">Dashboard</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading mb-2">
         Menu
     </div>
-    <li class="nav-item  {{ Request::is('artikel*') ? 'active' : ''}}">
-        <a class="nav-link" href="/artikel">
+    <li class="nav-item  {{ Request::is('artikel*') ? 'active' : '' }}">
+        <a class="nav-link " href="/artikel" style="font-family: 'Times New Roman', Times, serif;">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Artikel</span></a>
+            <span class="fs-6">Artikel</span></a>
     </li>
-    <li class="nav-item  {{ Request::is('berita*') ? 'active' : ''}}">
-        <a class="nav-link" href="/berita">
+    <li class="nav-item  {{ Request::is('berita*') ? 'active' : '' }}">
+        <a class="nav-link" href="/berita" style="font-family: 'Times New Roman', Times, serif;">
             <i class="fa-regular fa-newspaper"></i>
-            <span>Berita</span></a>
+            <span class="fs-6">Berita</span></a>
     </li>
-    <li class="nav-item  {{ Request::is('kegiatan*') ? 'active' : ''}}">
-        <a class="nav-link" href="/kegiatan">
-            <i class="fa-regular fa-calendar-plus"></i>
-            <span>Kegiatan</span></a>
+    <li class="nav-item  {{ Request::is('kegiatan*') ? 'active' : '' }}">
+        <a class="nav-link" href="/kegiatan" style="font-family: 'Times New Roman', Times, serif;">
+            <i class="fa-regular fa-calendar-plus "></i>
+            <span class="fs-6">Kegiatan</span></a>
     </li>
-    <!-- Nav Item - Pages Collapse Menu -->
-    
-    <!-- Nav Item - Utilities Collapse Menu -->
-   
-
-   
-
-  
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <div class="sidebar-heading">
-       Other
+        Other
     </div>
     <li class="nav-item ">
-        <a class="nav-link" href="/logout">
+        <a class="nav-link" href="/logout" style="font-family: 'Times New Roman', Times, serif;">
             <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span></a>
+            <span class="fs-6">Logout</span></a>
     </li>
-    
+
 
 
 

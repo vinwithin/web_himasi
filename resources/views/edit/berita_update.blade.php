@@ -43,20 +43,7 @@
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-    {{-- <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
 
-    <script>
-        
-        ClassicEditor
-            .create(document.querySelector('#editor'),  {
-                tabSpaces: 4,
-                ckfinder: {
-                    uploadUrl: "{{ route('ckeditor.kegiatan.upload', ['_token' => csrf_token()]) }}",
-                }
-            }, )
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+    <script src="/js/ckeditor.js"></script>
 @endsection

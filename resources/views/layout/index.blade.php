@@ -10,44 +10,13 @@
     <meta name="author" content="Ristek HIMASI">
 
     <title>HIMASI ADMIN</title>
-
-    <link rel="icon" href="/img/cropped-logo.png" type="image/gif">
-
+    <link rel="icon" href="/img/cropped-logo-si.png" type="image/gif">
     <!-- Custom fonts for this template-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;&display=swap" rel="stylesheet"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-
-    <style>
-        .ck-editor__editable_inline {
-            height: 500px;
-        }
-
-       
-         .image.image_resized img {
-           
-            max-width: 100%;
-            text-align: center;
-            
-        }
-
-      
-
-        .image {
-            text-align: center;
-            margin: auto;
-        }
-
-        p {
-            text-align: justify;
-        }
-    </style>
 </head>
 
 <body id="page-top">
@@ -63,14 +32,14 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" style="background-color: #edeef0">
 
                 <!-- Topbar -->
                 @include('layout/navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid text-dark ">
+                <div class="container-fluid text-black "  >
 
                     <!-- Page Heading -->
                     @yield('dashboard')

@@ -13,7 +13,7 @@
     <div class="d-flex justify-content-between mb-3">
         <h1 class=" text-dark fs-3">Berita</h1>
     </div>
-    <div class="card p-3">
+    <div class="card p-3 shadow">
         <div class="table-responsive col-lg-8">
             <a href="/berita/create" class="btn btn-primary mb-3">Buat Berita</a>
 

@@ -6,7 +6,7 @@
             {{ session('error') }}
         </div>
     @endif
-    <div class="card p-4">
+    <div class="card p-4 shadow">
         <form action="/berita/create" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
@@ -40,17 +40,7 @@
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ),
-            {
-                ckfinder:{
-                    uploadUrl: "{{ route('ckeditor.berita.upload', ['_token' => csrf_token() ]) }}",
-                }
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
+
+    <script src="/js/ckeditor.js"></script>
 @endsection

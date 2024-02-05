@@ -11,9 +11,9 @@
         </div>
     @endif
     <div class="d-flex justify-content-between mb-3">
-        <h1 class=" text-dark fs-3">Kegiatan</h1>
+        <h1 class="text-dark fs-3">Kegiatan</h1>
     </div>
-    <div class="card p-3 ">
+    <div class="card p-3 shadow">
         <div class="table-responsive col-lg-6">
             <a href="/kegiatan/create" class="btn btn-primary mb-3">Buat Kegiatan</a>
 

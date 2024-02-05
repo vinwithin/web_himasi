@@ -13,7 +13,7 @@
     <div class="d-flex mb-3">
         <h1 class=" text-dark fs-3">Artikel</h1>
     </div>
-    <div class="d-flex card p-3">
+    <div class="d-flex card shadow p-3">
         
 
       
