@@ -69,8 +69,6 @@ Route::middleware('auth')->group(function (){
 });
 
 
-
-
 Route::middleware('guest')->group(function(){
     Route::get('/login', [loginController::class, 'index'])->name('login');
     Route::post('/login', [loginController::class, 'login'])->middleware('throttle:login');

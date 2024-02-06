@@ -1,6 +1,6 @@
 @extends('layout/index')
 @section('artikel')
-    <div class="card p-4">
+    <div class="card p-4 ">
         <h1>{{ $artikel->title }}</h1>
         <p>Kategori : {{ $artikel->category_artikel->name }}</p>
         <p>Author : {{ $artikel->user->name }}</p>

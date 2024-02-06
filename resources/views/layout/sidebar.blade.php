@@ -47,7 +47,7 @@
         Other
     </div>
     <li class="nav-item ">
-        <a class="nav-link" href="/logout" style="font-family: 'Times New Roman', Times, serif;">
+        <a class="nav-link" href="" data-toggle="modal" data-target="#logoutModal" style="font-family: 'Times New Roman', Times, serif;">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="fs-6">Logout</span></a>
     </li>

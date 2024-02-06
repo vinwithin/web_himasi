@@ -31,25 +31,6 @@ class ArtikelController extends Controller
         ]);
 		
     }
-    public function check(){
-        $firstRow = Artikel::select('body')->first();
-
-        $imageTags = [];
-
-        if ($firstRow) {
-            // Use regular expression to extract img tags
-            preg_match_all('/storage[^>]+(png|jpg|jpeg)/i', $firstRow->body, $matches);
-
-            // Add extracted img tags to the array
-            $imageTags = $matches[0];
-        }
-
-        // Now $imageTags array contains all the img tags from the first row of the database column
-        foreach($imageTags as $img){
-            unlink($img);
-        }
-            return $imageTags;
-        
-    }
+   
     
 }

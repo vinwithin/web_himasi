@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Kegiatan;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class PostKegiatanController extends Controller
 {
@@ -22,10 +23,20 @@ class PostKegiatanController extends Controller
             
         ]);
         $validateData["user_id"] = auth()->user()->id;
+        $validateData['slug'] = 'require|unique:kegiatan';
         $validateData["slug"] = Str::slug($request->title, '-');
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        // $imageName = time() . '_' . $request->image_kegiatan->getClientOriginalName();
-        // $validateData['image_kegiatan'] = $imageName;
+        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+        $imageTags = $matches[0];
+        if (count($imageTags) > 0) {
+            foreach ($imageTags as $tagImage) {
+                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                $imageName = Str::random(10) . '.' . $extension;
+                Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
+                $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+            }
+        }
         try{
             $result = Kegiatan::create($validateData);
             if ($result) {
@@ -37,23 +48,6 @@ class PostKegiatanController extends Controller
         }catch(Exception $e){
             return redirect()->to('kegiatan')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         };
-    }
-
-    public function upload(Request $request){
-        $request->validate([
-            'upload' => 'required|image|mimes:png,jpg,jpeg|max:2024',
-        ]);
-        if($request->hasFile('upload')){
-            
-            $originName = $request->file('upload')->getClientOriginalName();
-            $imageName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $imageName = $imageName . time() . '.' . $extension;
-            // $request->file('upload')->move(public_path('media'), $imageName);
-            $request->file('upload')->storeAs('public/media/kegiatan/', $imageName);
-            $url = asset('storage/media/kegiatan/' . $imageName);
-            return response()->json(['fileName' => $imageName, 'uploaded' => 1, "url" => $url]);
-        }
     }
 
     public function destroy(Kegiatan $kegiatan){
@@ -79,7 +73,7 @@ class PostKegiatanController extends Controller
 
     public function edit(Kegiatan $kegiatan)
     {
-	    return view('edit/kegiatan_update',['kegiatan' => $kegiatan]);
+	    return view('admin/edit/kegiatan_update',['kegiatan' => $kegiatan]);
     }
 
     public function update(Request $request, Kegiatan $kegiatan){
@@ -88,10 +82,20 @@ class PostKegiatanController extends Controller
             'body' => 'required',
             // 'image_kegiatan' => 'required|image|mimes:png,jpg,jpeg|max:2024',
         ]);
+        $validateData['slug'] = 'require|unique:kegiatan';
         $validateData["slug"] = Str::slug($request->title, '-');
         $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        // $imageName = time() . '_' . $request->image_artikel->getClientOriginalName();
-        // $validateData['image_kegiatan'] = $imageName;
+        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+        $imageTags = $matches[0];
+        if (count($imageTags) > 0) {
+            foreach ($imageTags as $tagImage) {
+                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                $imageName = Str::random(10) . '.' . $extension;
+                Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
+                $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+            }
+        }
         try{
             $result = Kegiatan::where('id', $kegiatan->id)
                     ->update($validateData);
