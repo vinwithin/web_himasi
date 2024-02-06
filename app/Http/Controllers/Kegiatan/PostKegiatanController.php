@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kegiatan;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Kegiatan;
@@ -12,7 +13,7 @@ class PostKegiatanController extends Controller
 {
     public function index()
     {
-        return view('admin/post_kegiatan');
+        return view('admin/kegiatan/create');
     }
     public function store(Request $request)
     {
@@ -43,7 +44,7 @@ class PostKegiatanController extends Controller
                 // $request->image_kegiatan->storeAs('public', $imageName);
                 return redirect('/kegiatan')->with('success', 'Berhasil menambahkan data');
             } else {
-                return redirect('/kegiatan/create')->with("error", "Gagal menambahkan data!");
+                return redirect('/kegiatan/buat')->with("error", "Gagal menambahkan data!");
             }
         }catch(Exception $e){
             return redirect()->to('kegiatan')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
@@ -73,7 +74,7 @@ class PostKegiatanController extends Controller
 
     public function edit(Kegiatan $kegiatan)
     {
-	    return view('admin/edit/kegiatan_update',['kegiatan' => $kegiatan]);
+	    return view('admin/kegiatan/edit',['kegiatan' => $kegiatan]);
     }
 
     public function update(Request $request, Kegiatan $kegiatan){
@@ -103,7 +104,7 @@ class PostKegiatanController extends Controller
                 // $request->image_artikel->storeAs('public', $imageName);
                 return redirect('/kegiatan')->with('success', 'Berhasil mengubah data');
             } else {
-                return redirect('/kegiatan/create')->with("error", "Gagal mengubah data!");
+                return redirect('/kegiatan/sunting')->with("error", "Gagal mengubah data!");
             }
         }catch(Exception $e){
             return redirect()->to('kegiatan')->with("slugerror", "Gagal mengubah data! masukkan judul yang lain!");

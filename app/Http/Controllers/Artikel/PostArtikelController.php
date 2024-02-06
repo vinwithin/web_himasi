@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Artikel;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Artikel;
@@ -13,7 +14,7 @@ class PostArtikelController extends Controller
 {
     public function index()
     {
-        return view("admin/post_artikel", [
+        return view("admin/artikel/create", [
             'category_artikel' => Category_artikel::all(),
         ]);
     }
@@ -51,7 +52,7 @@ class PostArtikelController extends Controller
                 // $request->image_artikel->storeAs('public', $imageName);
                 return redirect('/artikel')->with('success', 'Berhasil menambahkan data');
             } else {
-                return redirect('/artikel/create')->with("error", "Gagal menambahkan data!");
+                return redirect('/artikel/buat')->with("error", "Gagal menambahkan data!");
             }
         } catch (Exception $e) {
             return redirect()->to('artikel')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
@@ -84,7 +85,7 @@ class PostArtikelController extends Controller
     public function edit(Artikel $artikel)
     {
         $category_artikel = Category_artikel::all();
-        return view('admin/edit/artikel_update', ['artikel' => $artikel, 'category_artikel' => $category_artikel]);
+        return view('admin/artikel/edit', ['artikel' => $artikel, 'category_artikel' => $category_artikel]);
     }
 
     public function update(Request $request, Artikel $artikel)
@@ -113,7 +114,7 @@ class PostArtikelController extends Controller
             if ($result) {
                 return redirect('/artikel')->with('success', 'Berhasil mengubah data');
             } else {
-                return redirect('/artikel/create')->with("error", "Gagal mengubah data!");
+                return redirect('/artikel/sunting')->with("error", "Gagal mengubah data!");
             }
         } catch (Exception $e) {
             return redirect()->to('artikel')->with("slugerror", "Gagal mengubah data! masukkan judul yang lain!");

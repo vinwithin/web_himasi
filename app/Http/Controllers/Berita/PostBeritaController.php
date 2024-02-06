@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Berita;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berita;
 use App\Models\Category_berita;
@@ -13,7 +14,7 @@ class PostBeritaController extends Controller
 {
     public function index()
     {
-        return view('admin/post_berita', [
+        return view('admin/berita/create', [
             'category_berita' => Category_berita::all(),
             // 'transaksis' => transaksi::get()
         ]);
@@ -51,7 +52,7 @@ class PostBeritaController extends Controller
             // $request->image_berita->storeAs('public', $imageName);
             return redirect('/berita')->with('success', 'berhasil menambahkan data');
         } else {
-            return redirect('/berita/create')->with("error", "Gagal menambahkan data!");
+            return redirect('/berita/buat')->with("error", "Gagal menambahkan data!");
         }
         } catch (Exception $e){
             return redirect()->to('berita')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
@@ -82,7 +83,7 @@ class PostBeritaController extends Controller
     public function edit(Berita $berita)
     {
         $category_berita = Category_berita::all();
-	    return view('admin/edit/berita_update',['berita' => $berita, 'category_berita' => $category_berita]);
+	    return view('admin/berita/edit',['berita' => $berita, 'category_berita' => $category_berita]);
     }
 
     public function update(Request $request, Berita $berita){
@@ -112,7 +113,7 @@ class PostBeritaController extends Controller
                 // $request->image_artikel->storeAs('public', $imageName);
                 return redirect('/berita')->with('success', 'berhasil mengubah data');
             } else {
-                return redirect('/berita/create')->with("error", "Gagal mengubah data!");
+                return redirect('/berita/sunting')->with("error", "Gagal mengubah data!");
             }
         }catch(Exception $e){
             return redirect()->to('berita')->with("slugerror", "Gagal mengubah data! masukkan judul yang lain!");

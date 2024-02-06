@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="card p-4">
-        <form action="/kegiatan/update/{{$kegiatan->slug}}" method="post" enctype="multipart/form-data">
+        <form action="/kegiatan/perbarui/{{$kegiatan->slug}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>

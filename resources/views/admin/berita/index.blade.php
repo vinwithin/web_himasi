@@ -15,9 +15,9 @@
     </div>
     <div class="card p-3 shadow">
         <div class="table-responsive col-lg-8">
-            <a href="/berita/create" class="btn btn-primary mb-3">Buat Berita</a>
+            <a href="/berita/buat" class="btn btn-primary mb-3">Buat Berita</a>
 
-            <form action="/berita/search" method="get" class="form-inline mr-auto w-100 navbar-search justify-content-end mb-3">
+            <form action="/berita" method="get" class="form-inline mr-auto w-100 navbar-search justify-content-end mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Cari..."
                         name="cari">
@@ -47,7 +47,7 @@
                             <td>{{ $post->category_berita->name }}</td>
                             <td>
                                 <a href="berita/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
-                                <a href="berita/edit/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="berita/sunting/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <a href="" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-regular fa-trash"></i></a>
                                 {{-- Modal hapus --}}
                                 <div class="modal fade" id="exampleModal{{$post->slug}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$post->slug}}" aria-hidden="true">
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="modal-footer">
                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                                          <a href="/berita/delete/{{$post->slug}}" class="btn btn-primary">Iya</a>
+                                          <a href="/berita/hapus/{{$post->slug}}" class="btn btn-primary">Iya</a>
                                         </div>
                                       </div>
                                     </div>
