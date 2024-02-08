@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailSend;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class regisController extends Controller
 {
@@ -14,6 +17,7 @@ class regisController extends Controller
         return view('auth/register');
     }
     public function register(Request $request){
+        $str = Str::random(100);
         $validateData = $request->validate([
             'name' => 'required',
             'username' => 'required',
@@ -21,9 +25,27 @@ class regisController extends Controller
             'password' => 'required|min:6|max:32|confirmed',
         ]);
         $validateData["password"] = Hash::make($validateData["password"]);
+        $validateData['verify_key'] = $str;
         $result = User::create($validateData);
-        if($result){
-            return redirect()->to('/login')->withSuccess("Berhasil Daftar Akun, Silahkan Login");
+        $details = [
+            'name' => $validateData['name'],
+            'url' => request()->getHttpHost() . '/register/verify/' . $str,
+        ];
+        $check =  Mail::to($validateData['email'])->send(new MailSend($details));
+        if($check){
+            return "Silahkan Periksa Alamat Email Anda Untuk Melakukan Verifikasi";
+        }else{
+            return redirect()->to('/register')->with("error", "Gagal Mendaftar Akun, Silahkan Coba Lagi");
+        }
+    }
+
+    public function verify($verify_key){
+        $checkKey = User::select('verify_key')->where('verify_key', $verify_key)
+                    ->update(['active' => 1]);
+        if($checkKey){
+            return "Verifikasi Berhasil Silahkan login";
+        }else{
+            return "Key Tidak Valid";
         }
     }
 }

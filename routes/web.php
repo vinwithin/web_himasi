@@ -68,6 +68,7 @@ Route::middleware('guest')->group(function(){
     Route::post('/login', [loginController::class, 'login'])->middleware('throttle:login');
     Route::get('/register', [regisController::class, 'index']);
     Route::post('/register', [regisController::class, 'register']);
+    Route::get('/register/verify/{verify_key}', [regisController::class, 'verify']);
 });
 
 

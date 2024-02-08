@@ -34,7 +34,7 @@
                                         <div class="mb-3">
                                             <label for="exampleInputname" class="form-label">Name</label>
                                             <input type="text" class="form-control" id="exampleInputname"
-                                                name="name">
+                                                name="name" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputusername" class="form-label">Username</label>
