@@ -41,8 +41,22 @@
             <span class="fs-6">Kegiatan</span></a>
     </li>
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    @can('view', App\Models\User::class)
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading mb-2">
+            Master
+        </div>
+        <li class="nav-item  {{ Request::is('master*') ? 'active' : '' }}">
+            <a class="nav-link" href="/master" style="font-family: 'Times New Roman', Times, serif;">
+                <i class="fa-regular fa-user"></i>
+                <span class="fs-6">Pengguna</span></a>
+        </li>
+    @endcan
 
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
     <div class="sidebar-heading">
         Other
     </div>
@@ -51,13 +65,6 @@
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="fs-6">Logout</span></a>
     </li>
-
-
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

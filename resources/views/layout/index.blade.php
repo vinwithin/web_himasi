@@ -45,6 +45,7 @@
                     @yield('berita')
                     @yield('artikel')
                     @yield('kegiatan')
+                    @yield('manage_user')
 
 
 

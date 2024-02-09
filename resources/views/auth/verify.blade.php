@@ -7,7 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="alert alert-success text-center">Silahkan Periksa Email Anda Untuk Melakukan Verifikasi</div>
-    {{-- <h1 style="text-align: center"> </h1> --}}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Email Verification Success</h5>
+                        <p class="card-text">Your email has been successfully verified.</p>
+                        <a href="/login" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

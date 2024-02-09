@@ -10,27 +10,31 @@ use PhpParser\Node\Stmt\Return_;
 
 class loginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('auth/login');
     }
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $validateData = $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required|min:6|max:32',
+            'password' => 'required|min:8|max:32',
         ]);
-        $user = User::where('email', $validateData['email'])->first();
-        if (!$user->active ) {
+        $user = User::select('active')->where('email', $validateData['email'])->get();
+        if (!$user) {
             return "Akun anda belum aktif";
-        }
-        if(Auth::attempt($validateData)){
-            $request->session()->regenerate();
-            return redirect()->intended('/')->with("success","Login Berhasil");
-        }else{
-            return back()->with('loginFailed', 'Email dan Password salah!');
+        } else {
+            if (Auth::attempt($validateData)) {
+                $request->session()->regenerate();
+                return redirect()->intended('/')->with("success", "Login Berhasil");
+            } else {
+                return back()->with('loginFailed', 'Email dan Password salah!');
+            }
         }
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

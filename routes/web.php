@@ -10,6 +10,7 @@ use App\Http\Controllers\Berita\PostBeritaController;
 use App\Http\Controllers\Kegiatan\PostKegiatanController;
 use App\Http\Controllers\Auth\regisController;
 use App\Http\Controllers\Auth\forgotPassword;
+use App\Http\Controllers\Superadmin\masterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,12 @@ Route::middleware('auth')->group(function (){
     Route::get('/logout', [loginController::class, 'logout']);
 });
 
+//Route Superadmin
+Route::middleware('auth')->group(function (){
+    Route::get('/master', [masterController::class, 'index']); 
+    Route::get('/master/hapus/{id}', [masterController::class, 'index']); 
+});
+
 //Route Tamu 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [loginController::class, 'index'])->name('login');
@@ -78,5 +85,3 @@ Route::middleware('guest')->group(function(){
 });
 
 
-
-//Route::post('/post-image', [BeritaController::class, 'upload'])->middleware(['api', 'cors']);

@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class PostArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view("admin/artikel/create", [
             'category_artikel' => Category_artikel::all(),
