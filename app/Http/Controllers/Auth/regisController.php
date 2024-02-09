@@ -20,9 +20,8 @@ class regisController extends Controller
         $str = Str::random(100);
         $validateData = $request->validate([
             'name' => 'required',
-            'username' => 'required',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:6|max:32|confirmed',
+            'password' => 'required|min:8|max:32|confirmed',
         ]);
         $validateData["password"] = Hash::make($validateData["password"]);
         $validateData['verify_key'] = $str;

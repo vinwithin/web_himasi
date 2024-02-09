@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 </head>
 
@@ -35,21 +34,21 @@
                         @if (session('status'))
                             <div class="alert alert-success">{{ session('status') }}</div>
                         @endif
-                        <form method="POST" >
+                        <form method="POST" action="/reset-password">
                             @csrf
-                            <input type="hidden" name="token" >
+                            <input type="hidden" name="token" value="{{$token}}">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" class="form-control"  required autofocus>
+                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"  required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password Baru:</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
+                                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror " required>
                                 @error('password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="password_confirmation">Konfirmasi Password Baru:</label>
                                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
                             </div>
@@ -62,6 +61,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    <script src="/js/bootstrap.bundle.min.js"></script>
         < /body> 
         </html>

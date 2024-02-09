@@ -44,7 +44,6 @@
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>
     </div>
-    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script> --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
 
     <script src="/js/ckeditor.js"></script>

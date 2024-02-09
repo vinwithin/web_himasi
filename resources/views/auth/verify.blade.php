@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 style="text-align: center">Silahkan Periksa Email Anda Untuk Melakukan Verifikasi </h1>
+    <div class="alert alert-success text-center">Silahkan Periksa Email Anda Untuk Melakukan Verifikasi</div>
+    {{-- <h1 style="text-align: center"> </h1> --}}
 </body>
 </html>

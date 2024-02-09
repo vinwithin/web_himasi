@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register</title>
     <link rel="icon" href="/img/cropped-logo.png" type="image/gif" >
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -33,23 +32,33 @@
                     
                                         <div class="mb-3">
                                             <label for="exampleInputname" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="exampleInputname"
-                                                name="name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputusername" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="exampleInputusername"
-                                                name="username">
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputname"
+                                                name="name" required value="{{ old('name') }}">
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                name="email">
+                                            <input type="email" class="form-control  @error('email') is-invalid @enderror" id="exampleInputEmail1"
+                                                name="email" required value="{{ old('email') }}">
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror"" id="exampleInputPassword1"
                                                 name="password">
+                                                @error('password')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputPassword2" class="form-label">Confirm
@@ -66,9 +75,7 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
          <script src="https://kit.fontawesome.com/f10456a175.js" crossorigin="anonymous"></script>
 </body>
 

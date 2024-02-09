@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -19,11 +17,6 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
-    @endif
-    @if (session()->has('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
         </div>
     @endif
     <div class="container">
@@ -39,7 +32,7 @@
                             @csrf
                             <div class="form-group mb-4">
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" class="form-control" required
+                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" required
                                     autofocus>
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
@@ -54,6 +47,7 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-        < /body> <
-        /html>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    </body> 
+    </html>
+

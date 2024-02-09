@@ -9,7 +9,7 @@ use App\Http\Controllers\Artikel\PostArtikelController;
 use App\Http\Controllers\Berita\PostBeritaController;
 use App\Http\Controllers\Kegiatan\PostKegiatanController;
 use App\Http\Controllers\Auth\regisController;
-use App\Http\Controllers\forgotPassword;
+use App\Http\Controllers\Auth\forgotPassword;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,9 +70,11 @@ Route::middleware('guest')->group(function(){
     Route::get('/register', [regisController::class, 'index']);
     Route::post('/register', [regisController::class, 'register']);
     Route::get('/register/verify/{verify_key}', [regisController::class, 'verify']);
-    Route::get('forgot-password', [forgotPassword::class, 'index']);
-    Route::get('reset-password/{token}', [forgotPassword::class, 'reset'])->name('password.reset');
-    Route::post('forgot-password', [forgotPassword::class, 'sendEmail']);
+    Route::get('/forgot-password', [forgotPassword::class, 'index']);
+    Route::post('/forgot-password', [forgotPassword::class, 'sendEmail']);
+    Route::get('/reset-password/{token}', [forgotPassword::class, 'reset'])->name('password.reset');
+    Route::post('/reset-password', [forgotPassword::class, 'update']);
+
 });
 
 
