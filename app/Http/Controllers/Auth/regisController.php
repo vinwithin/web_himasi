@@ -24,7 +24,7 @@ class regisController extends Controller
             'password' => 'required|min:8|max:32|confirmed',
         ]);
         $validateData["password"] = Hash::make($validateData["password"]);
-        $validateData['role'] = "superadmin";
+        $validateData['role'] = "admin";
         $validateData['verify_key'] = $str;
         User::create($validateData);
         $details = [
@@ -43,7 +43,7 @@ class regisController extends Controller
         $checkKey = User::select('verify_key')->where('verify_key', $verify_key)
                     ->update(['active' => 1]);
         if($checkKey){
-            return view('auth/after_verify');
+            return view('auth/verify');
         }else{
             return "Key Tidak Valid";
         }
