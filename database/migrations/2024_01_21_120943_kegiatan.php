@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('slug')->unique();
             $table->text('excerpt');
-            $table->text('image_kegiatan');
+            // $table->text('image_kegiatan');
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
