@@ -12,7 +12,7 @@ class loginController extends Controller
 {
     public function index()
     {
-        return view('auth/login');
+        return view('admin/auth/login');
     }
     public function login(Request $request)
     {

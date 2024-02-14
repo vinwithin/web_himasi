@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class regisController extends Controller
 {
     public function index() {
-        return view('auth/register');
+        return view('admin/auth/register');
     }
     public function register(Request $request){
         $str = Str::random(100);
@@ -43,7 +43,7 @@ class regisController extends Controller
         $checkKey = User::select('verify_key')->where('verify_key', $verify_key)
                     ->update(['active' => 1]);
         if($checkKey){
-            return view('auth/verify');
+            return view('admin/auth/verify');
         }else{
             return "Key Tidak Valid";
         }

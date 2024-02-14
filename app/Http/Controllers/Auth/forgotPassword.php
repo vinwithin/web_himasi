@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class forgotPassword extends Controller
 {
     public function index(){
-        return view('auth/forgot_password');
+        return view('admin/auth/forgot_password');
     }
 
     public function sendEmail(Request $request){
@@ -28,7 +28,7 @@ class forgotPassword extends Controller
                     : back()->withErrors(['email' => __($status)]);
     }
     public function reset($token){
-        return view('auth/reset_password', ['token' => $token]);
+        return view('admin/auth/reset_password', ['token' => $token]);
     }
 
     public function update(Request $request){

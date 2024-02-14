@@ -53,6 +53,6 @@ class MailSend extends Mailable
 
     public function build(){
         return $this->subject('verifikasi_akun')
-                    ->view('mail/mailSend');
+                    ->view('admin/mail/mailSend');
     }
 }
