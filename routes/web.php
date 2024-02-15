@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/profil', [profilController::class, 'index']);
+    Route::post('/profil/ubah-password', [profilController::class, 'update']);
 
     Route::get('/berita', [BeritaController::class, 'index']);
     Route::get('/berita/detail/{berita:slug}', [BeritaController::class, 'show']);
