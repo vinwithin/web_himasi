@@ -32,7 +32,7 @@
                     <form id="changePasswordForm" method="POST" action="/profil/ubah-password">
                         @csrf
                         <div class="mb-3">
-                            <label for="prev" class="form-label">Password Sebelumnya</label>
+                            <label for="prev" class="form-label fw-medium">Password Sebelumnya</label>
                             <input type="password" class="form-control @error('old_password') is-invalid @enderror"
                                 id="prev" name="old_password" required>
                             @error('old_password')
@@ -42,7 +42,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="newpassword" class="form-label">Password Baru</label>
+                            <label for="newpassword" class="form-label fw-medium">Password Baru</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 id="newpassword" name="password">
                             @error('password')
@@ -52,7 +52,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Konfirmasi Password</label>
+                            <label for="confirm_password" class="form-label fw-medium">Konfirmasi Password</label>
                             <input type="password" class="form-control" id="confirm_password" name="password_confirmation">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

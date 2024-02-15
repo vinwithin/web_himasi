@@ -29,6 +29,54 @@
             </div>
         </div>
     </div>
+        <div class="card p-4 shadow mt-4">
+            <div class="card-header">
+                Grafik Jumlah
+            </div>
+            <div class="card-body">
+                <div id="grafik"></div>
+            </div>
+        </div>
     
-    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        let artikel = <?php echo json_encode($total_artikel) ?>;
+        let berita = <?php echo json_encode($total_berita) ?>;
+        let kegiatan = <?php echo json_encode($total_kegiatan) ?>;
+        let bulan = <?php echo json_encode($bulan) ?>;
+        Highcharts.chart('grafik', {
+            title:{
+                text: "Jumlah Data"
+            },
+            yAxis:{
+                title:{
+                    text: "Jumlah Data Masuk",
+                    
+                }
+            },
+            xAxis:{
+                categories: bulan
+            },
+            plotOptions:{
+                series:{
+                    allowPointSelect:true
+                }
+            },
+            series: [
+                {
+                    name: "Artikel",
+                    data: artikel
+                },
+                {
+                    name: "Berita",
+                    data:berita
+                },
+                {
+                    name: "Kegiatan",
+                    data: kegiatan
+                }
+            ]
+            
+        });
+    </script>
 @endsection
