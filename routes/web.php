@@ -10,6 +10,7 @@ use App\Http\Controllers\Berita\PostBeritaController;
 use App\Http\Controllers\Kegiatan\PostKegiatanController;
 use App\Http\Controllers\Auth\regisController;
 use App\Http\Controllers\Auth\forgotPassword;
+use App\Http\Controllers\profilController;
 use App\Http\Controllers\Superadmin\masterController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 //Route Berita
 Route::middleware('auth')->group(function (){
     Route::get('/', [HomeController::class, 'index']);
+    Route::get('/profil', [profilController::class, 'index']);
 
     Route::get('/berita', [BeritaController::class, 'index']);
     Route::get('/berita/detail/{berita:slug}', [BeritaController::class, 'show']);

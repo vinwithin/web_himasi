@@ -46,6 +46,7 @@
                     @yield('artikel')
                     @yield('kegiatan')
                     @yield('manage_user')
+                    @yield('profil')
 
 
 
