@@ -17,6 +17,8 @@ class userSeeder extends Seeder
             "name" => "Ristek Himasi",
             "email" => "ristekhimasi@gmail.com",
             "password" => bcrypt("ristekbisa2024"),
+            "active" => 1,
+            "role" => "superadmin",
          ]);
     }
 }

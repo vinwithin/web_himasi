@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             category_artikel::class,
             category_berita::class,
+            userSeeder::class
         ]);
     }
 }
