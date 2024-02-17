@@ -39,6 +39,7 @@
         </div>
     
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
         let artikel = <?php echo json_encode($total_artikel) ?>;
         let berita = <?php echo json_encode($total_berita) ?>;

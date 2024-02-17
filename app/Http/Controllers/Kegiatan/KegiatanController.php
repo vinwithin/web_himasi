@@ -11,12 +11,11 @@ use Illuminate\Http\Request;
 class KegiatanController extends Controller
 {
     public function index(){
-        $kegiatan = Kegiatan::orderBy('title', 'asc')->paginate(10);
         if(request()->has('cari')){
             $kegiatan = Kegiatan::where('title','like',"%".request()->get('cari')."%")->orderBy('title', 'asc')->paginate(10);
         }
         return view('admin/kegiatan/index',[
-            'kegiatan' => $kegiatan,
+            'kegiatan' =>        Kegiatan::orderBy('title', 'asc')->paginate(10),
         ]);
     }
     public function show(Kegiatan $kegiatan)
