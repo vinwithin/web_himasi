@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->hasMany(Artikel::class);
     }
     public function berita(){
-        return $this->hasMan(Berita::class);
+        return $this->hasMany(Berita::class);
     }
     public function kegiatan(){
         return $this->hasMany(Kegiatan::class);

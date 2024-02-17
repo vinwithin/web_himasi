@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kegiatan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('judul');
+            $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');
             // $table->text('image_kegiatan');

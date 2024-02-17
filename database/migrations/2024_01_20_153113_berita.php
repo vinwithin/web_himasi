@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('judul');
+            $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->foreignId('category_berita_id');
