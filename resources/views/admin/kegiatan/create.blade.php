@@ -19,6 +19,16 @@
                     </div>
                 @enderror
             </div>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control @error('image_kegiatan') is-invalid  @enderror"
+                    id="image_kegiatan" name="image_kegiatan" >
+                <label class="input-group-text" for="image_kegiatan">Upload Thumbnails</label>
+                @error('image_kegiatan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>

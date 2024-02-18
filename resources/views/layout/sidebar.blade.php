@@ -27,7 +27,7 @@
     </div>
     <li class="nav-item  {{ Request::is('artikel*') ? 'active' : '' }}">
         <a class="nav-link " href="/artikel" style="font-family: 'Times New Roman', Times, serif;">
-            <i class="fa-regular fa-book"></i>
+            <i class="fa-solid fa-receipt"></i>
             <span class="fs-6">Artikel</span></a>
     </li>
     <li class="nav-item  {{ Request::is('berita*') ? 'active' : '' }}">

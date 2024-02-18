@@ -17,7 +17,7 @@
         
 
       
-        <div class="table-responsive col-lg-8 ">
+        <div class="table-responsive col-lg-10 ">
             <a href="/artikel/buat" class="btn btn-primary mb-1">Buat Artikel</a>
 
             <form action="/artikel" method="get" class="form-inline mr-auto w-100 navbar-search justify-content-end mb-3">
@@ -51,7 +51,7 @@
                         <td>
                             <a href="/artikel/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
                             <a href="/artikel/sunting/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="/artikel/delete/{{$post->slug}}" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-regular fa-trash"></i></a>
+                            <a href="/artikel/delete/{{$post->slug}}" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-solid fa-trash-can"></i></a>
                             <div class="modal fade" id="exampleModal{{$post->slug}}" tabindex="1" aria-labelledby="exampleModalLabel{{$post->slug}}" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">

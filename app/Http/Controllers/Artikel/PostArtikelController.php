@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Artikel;
+
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -23,33 +24,34 @@ class PostArtikelController extends Controller
 
     public function store(Request $request)
     {
-        $imageTags = [];
-        $validateData = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            // 'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
-            'category_artikel_id' => 'required',
-        ]);
-
-        $validateData["user_id"] = auth()->user()->id;
-        $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
-        $imageTags = $matches[0];
-        if (count($imageTags) > 0) {
-            foreach ($imageTags as $tagImage) {
-                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
-                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
-                $imageName = Str::random(10) . '.' . $extension;
-                Storage::disk('public')->put('media/artikel/' . $imageName, base64_decode($image));
-                $validateData['body'] = str_replace($tagImage,  '/storage/media/artikel/' . $imageName, $validateData['body']);
-            }
-        }
         try {
+            $imageTags = [];
+            $validateData = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+                'category_artikel_id' => 'required',
+            ]);
 
+            $validateData["user_id"] = auth()->user()->id;
+            $validateData["slug"] = Str::slug($request->title, '-');
+            $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+            $image_name = time() . '_' . $request->image_artikel->getClientOriginalName();
+            Storage::disk('public')->put('media/artikel/' . $image_name, $request->image_artikel);
+            $validateData['image_artikel'] = $image_name;
+            preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+            $imageTags = $matches[0];
+            if (count($imageTags) > 0) {
+                foreach ($imageTags as $tagImage) {
+                    $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                    $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                    $imageName = Str::random(10) . '.' . $extension;
+                    Storage::disk('public')->put('media/artikel/' . $imageName, base64_decode($image));
+                    $validateData['body'] = str_replace($tagImage,  '/storage/media/artikel/' . $imageName, $validateData['body']);
+                }
+            }
             $result = Artikel::create($validateData);
             if ($result) {
-                // $request->image_artikel->storeAs('public', $imageName);
                 return redirect('/artikel')->with('success', 'Berhasil menambahkan data');
             } else {
                 return redirect('/artikel/buat')->with("error", "Gagal menambahkan data!");
@@ -90,25 +92,30 @@ class PostArtikelController extends Controller
 
     public function update(Request $request, Artikel $artikel)
     {
-        $validateData = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'category_artikel_id' => 'required',
-        ]);
-        $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
-        $imageTags = $matches[0];
-        if (count($imageTags) > 0) {
-            foreach ($imageTags as $tagImage) {
-                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
-                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
-                $imageName = Str::random(10) . '.' . $extension;
-                Storage::disk('public')->put('media/artikel/' . $imageName, base64_decode($image));
-                $validateData['body'] = str_replace($tagImage,  '/storage/media/artikel/' . $imageName, $validateData['body']);
-            }
-        }
         try {
+            $validateData = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'image_artikel' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+                'category_artikel_id' => 'required',
+            ]);
+            $validateData["slug"] = Str::slug($request->title, '-');
+            $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+            $image_name = time() . '_' . $request->image_artikel->getClientOriginalName();
+            Storage::disk('public')->put('media/artikel/' . $image_name, $request->image_artikel);
+            $validateData['image_artikel'] = $image_name;
+            preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+            $imageTags = $matches[0];
+            if (count($imageTags) > 0) {
+                foreach ($imageTags as $tagImage) {
+                    $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                    $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                    $imageName = Str::random(10) . '.' . $extension;
+                    Storage::disk('public')->put('media/artikel/' . $imageName, base64_decode($image));
+                    $validateData['body'] = str_replace($tagImage,  '/storage/media/artikel/' . $imageName, $validateData['body']);
+                }
+            }
+
             $result = Artikel::where('id', $artikel->id)
                 ->update($validateData);
             if ($result) {

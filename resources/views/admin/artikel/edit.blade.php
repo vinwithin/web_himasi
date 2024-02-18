@@ -35,6 +35,16 @@
                     @endforeach
                 </select>
             </div>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control @error('image_artikel') is-invalid @enderror" id="image_artikel"
+                    name="image_artikel" accept="image/png, image/jpeg">
+                <label class="input-group-text" for="image_artikel">Upload Thumbnails</label>
+                @error('image_artikel')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>
                 @error('body')

@@ -17,41 +17,44 @@ class PostKegiatanController extends Controller
     }
     public function store(Request $request)
     {
+        try {
+            $validateData = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
 
-        $validateData = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            
-        ]);
-        $validateData["user_id"] = auth()->user()->id;
-        $validateData['slug'] = 'require|unique:kegiatan';
-        $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
-        $imageTags = $matches[0];
-        if (count($imageTags) > 0) {
-            foreach ($imageTags as $tagImage) {
-                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
-                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
-                $imageName = Str::random(10) . '.' . $extension;
-                Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
-                $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+            ]);
+            $validateData["user_id"] = auth()->user()->id;
+            $validateData['slug'] = 'require|unique:kegiatan';
+            $validateData["slug"] = Str::slug($request->title, '-');
+            $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+            $image_name = time() . '_' . $request->image_kegiatan->getClientOriginalName();
+            Storage::disk('public')->put('media/kegiatan/' . $image_name, $request->image_kegiatan);
+            $validateData['image_kegiatan'] = $image_name;
+            preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+            $imageTags = $matches[0];
+            if (count($imageTags) > 0) {
+                foreach ($imageTags as $tagImage) {
+                    $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                    $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                    $imageName = Str::random(10) . '.' . $extension;
+                    Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
+                    $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+                }
             }
-        }
-        try{
+
             $result = Kegiatan::create($validateData);
             if ($result) {
-                // $request->image_kegiatan->storeAs('public', $imageName);
                 return redirect('/kegiatan')->with('success', 'Berhasil menambahkan data');
             } else {
                 return redirect('/kegiatan/buat')->with("error", "Gagal menambahkan data!");
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->to('kegiatan')->with("slugerror", "Gagal menambahkan data! masukkan judul yang lain!");
         };
     }
 
-    public function destroy(Kegiatan $kegiatan){
+    public function destroy(Kegiatan $kegiatan)
+    {
         $firstRow = Kegiatan::select('body')->find($kegiatan->id);
         $imageTags = [];
         if ($firstRow) {
@@ -60,56 +63,58 @@ class PostKegiatanController extends Controller
 
             // Add extracted img tags to the array
             $imageTags = $matches[0];
-            if(count($imageTags) > 0){
+            if (count($imageTags) > 0) {
                 foreach ($imageTags as $tag) {
 
-                        // Delete the file
+                    // Delete the file
                     unlink($tag);
                 }
             }
         }
-        Kegiatan::where('id', $kegiatan->id)->delete(); 
+        Kegiatan::where('id', $kegiatan->id)->delete();
         return redirect('/kegiatan')->with('success', 'Kegiatan Berhasil Dihapus!');
     }
 
     public function edit(Kegiatan $kegiatan)
     {
-	    return view('admin/kegiatan/edit',['kegiatan' => $kegiatan]);
+        return view('admin/kegiatan/edit', ['kegiatan' => $kegiatan]);
     }
 
-    public function update(Request $request, Kegiatan $kegiatan){
-        $validateData = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            // 'image_kegiatan' => 'required|image|mimes:png,jpg,jpeg|max:2024',
-        ]);
-        $validateData['slug'] = 'require|unique:kegiatan';
-        $validateData["slug"] = Str::slug($request->title, '-');
-        $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
-        preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
-        $imageTags = $matches[0];
-        if (count($imageTags) > 0) {
-            foreach ($imageTags as $tagImage) {
-                $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
-                $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
-                $imageName = Str::random(10) . '.' . $extension;
-                Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
-                $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+    public function update(Request $request, Kegiatan $kegiatan)
+    {
+        try {
+            $validateData = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'image_kegiatan' => 'required|image|mimes:png,jpg,jpeg|max:2024',
+            ]);
+            $validateData['slug'] = 'require|unique:kegiatan';
+            $validateData["slug"] = Str::slug($request->title, '-');
+            $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
+            $image_name = time() . '_' . $request->image_kegiatan->getClientOriginalName();
+            Storage::disk('public')->put('media/kegiatan/' . $image_name, $request->image_kegiatan);
+            $validateData['image_kegiatan'] = $image_name;
+            preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
+            $imageTags = $matches[0];
+            if (count($imageTags) > 0) {
+                foreach ($imageTags as $tagImage) {
+                    $image = preg_replace('/^data:image\/\w+;base64,/', '', $tagImage);
+                    $extension = explode('/', explode(':', substr($tagImage, 0, strpos($tagImage, ';')))[1])[1];
+                    $imageName = Str::random(10) . '.' . $extension;
+                    Storage::disk('public')->put('media/kegiatan/' . $imageName, base64_decode($image));
+                    $validateData['body'] = str_replace($tagImage,  '/storage/media/kegiatan/' . $imageName, $validateData['body']);
+                }
             }
-        }
-        try{
+
             $result = Kegiatan::where('id', $kegiatan->id)
-                    ->update($validateData);
+                ->update($validateData);
             if ($result) {
-                // $request->image_artikel->storeAs('public', $imageName);
                 return redirect('/kegiatan')->with('success', 'Berhasil mengubah data');
             } else {
                 return redirect('/kegiatan/sunting')->with("error", "Gagal mengubah data!");
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->to('kegiatan')->with("slugerror", "Gagal mengubah data! masukkan judul yang lain!");
         }
     }
-
-    
 }

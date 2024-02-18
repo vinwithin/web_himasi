@@ -12,11 +12,12 @@ class BeritaController extends Controller
 {
     public function index()
     {   
+        $berita = Berita::with(['category_berita'])->orderBy('title', 'asc')->paginate(10);
         if(request()->has('cari')){
             $berita = Berita::where('title','like',"%".request()->get('cari')."%")->with('category_berita')->orderBy('title', 'asc')->paginate(10);
         }
         return view('admin/berita/index',[
-            'berita' =>  Berita::with(['category_berita'])->orderBy('title', 'asc')->paginate(10),
+            'berita' =>  $berita
         ]);
     }
     

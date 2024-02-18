@@ -19,7 +19,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="category_berita_id" class="form-label">Kategori</label>
                 <select class="form-select" name="category_berita_id" id="category_berita_id" required>
                     <option value="" selected="selected" hidden="hidden">Pilih Kategori</option>
@@ -27,6 +27,16 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control @error('image_berita') is-invalid @enderror" id="image_berita"
+                    name="image_berita" accept="jpg,png" >
+                <label class="input-group-text" for="image_berita">Upload Thumbnails</label>
+                @error('image_berita')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>

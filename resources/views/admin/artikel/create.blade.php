@@ -19,7 +19,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="category_artikel_id" class="form-label">Kategori</label>
                 @error('category_artikel_id')
                     <p class="text-danger">{{ $message }}</p>
@@ -31,6 +31,17 @@
                     @endforeach
                 </select>
             </div>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control @error('image_artikel') is-invalid @enderror" id="image_artikel"
+                    name="image_artikel" accept="image/png, image/jpeg">
+                <label class="input-group-text" for="image_artikel">Upload Thumbnails</label>
+                @error('image_artikel')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>
                 @error('body')
@@ -39,7 +50,7 @@
                 {{-- <input id="body" type="hidden" name="body" value="{{ old('body') }}"> --}}
                 <textarea name="body" id="editor"></textarea>
             </div>
-
+          
             <a href="/artikel" class="btn btn-warning mt-2">Back</a>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>

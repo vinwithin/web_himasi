@@ -14,7 +14,7 @@
         <h1 class="text-dark fs-3">Kegiatan</h1>
     </div>
     <div class="card p-3 shadow">
-        <div class="table-responsive col-lg-6">
+        <div class="table-responsive col-lg-8">
             <a href="/kegiatan/buat" class="btn btn-primary mb-3">Buat Kegiatan</a>
 
             <form action="/kegiatan" method="get" class="form-inline mr-auto w-100 navbar-search justify-content-end mb-3">
@@ -47,7 +47,7 @@
                         <td>
                             <a href="kegiatan/detail/{{$post->slug}}" class="badge bg-info"><i class="fa-regular fa-eye"></i></a>
                             <a href="kegiatan/sunting/{{$post->slug}}" class="badge bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-regular fa-trash"></i></a>
+                            <a href="" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->slug}}"><i class="fa-solid fa-trash-can"></i></a>
                             {{-- Modal hapus --}}
                             <div class="modal fade" id="exampleModal{{$post->slug}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$post->slug}}" aria-hidden="true">
                                 <div class="modal-dialog">

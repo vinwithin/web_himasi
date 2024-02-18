@@ -4,7 +4,7 @@
         <div class="col-sm-4">
             <div class="card shadow">
                 <div class="card-body">
-                   <h5 class="card-title"> <span><i class="fa-regular fa-book mr-2"></i></span>Artikel</h5>
+                   <h5 class="card-title"> <span><i class="fa-solid fa-receipt mr-2"></i></span>Artikel</h5>
                     <p class="card-text">Jumlah artikel yang sudah dibuat : {{ count($artikel) }}</p>
                     <a href="artikel/buat" class="btn btn-primary">Buat Artikel</a>
                 </div>
