@@ -20,8 +20,8 @@
                 @enderror
             </div>
             <div class="input-group mb-3">
-                <input type="file" class="form-control @error('image_kegiatan') is-invalid  @enderror"
-                    id="image_kegiatan" name="image_kegiatan" >
+                <input type="file" onchange="loadFile(event)" class="form-control @error('image_kegiatan') is-invalid  @enderror"
+                    id="image_kegiatan" name="image_kegiatan" accept="image/png, image/jpeg, image/jpg"  >
                 <label class="input-group-text" for="image_kegiatan">Upload Thumbnails</label>
                 @error('image_kegiatan')
                     <div class="invalid-feedback">
@@ -29,6 +29,7 @@
                     </div>
                 @enderror
             </div>
+            <img id="output" style="max-width: 20%"/>
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>
                 @error('body')

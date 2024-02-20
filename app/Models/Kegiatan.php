@@ -18,4 +18,7 @@ class Kegiatan extends Model
         'image_kegiatan',
         'body',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

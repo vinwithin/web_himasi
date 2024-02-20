@@ -36,15 +36,16 @@
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="file" class="form-control @error('image_artikel') is-invalid @enderror" id="image_artikel"
-                    name="image_artikel" accept="image/png, image/jpeg">
+                <input type="file" onchange="loadFile(event)" class="form-control @error('image_artikel') is-invalid @enderror" id="image_artikel"
+                    name="image_artikel" value="oke" accept="image/png, image/jpeg, image/jpg" >
                 <label class="input-group-text" for="image_artikel">Upload Thumbnails</label>
                 @error('image_artikel')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+                </div>
+                <img id="output" style="max-width: 20%" />
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>
                 @error('body')
@@ -57,6 +58,5 @@
         </form>
     </div>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
-
     <script src="/js/ckeditor.js"></script>
 @endsection

@@ -128,6 +128,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/js/preview.js"></script>
     <script src="https://kit.fontawesome.com/f10456a175.js" crossorigin="anonymous"></script>
 
 </body>

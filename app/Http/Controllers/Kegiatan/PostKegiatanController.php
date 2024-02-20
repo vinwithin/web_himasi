@@ -28,7 +28,7 @@ class PostKegiatanController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_kegiatan->getClientOriginalName();
-            Storage::disk('public')->put('media/kegiatan/' . $image_name, $request->image_kegiatan);
+            $request->image_kegiatan->storeAs('public/media/kegiatan/thumbnails', $image_name);
             $validateData['image_kegiatan'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];
@@ -71,6 +71,7 @@ class PostKegiatanController extends Controller
                 }
             }
         }
+        unlink("storage/media/kegiatan/thumbnails/".$kegiatan->image_kegiatan);
         Kegiatan::where('id', $kegiatan->id)->delete();
         return redirect('/kegiatan')->with('success', 'Kegiatan Berhasil Dihapus!');
     }
@@ -92,7 +93,7 @@ class PostKegiatanController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_kegiatan->getClientOriginalName();
-            Storage::disk('public')->put('media/kegiatan/' . $image_name, $request->image_kegiatan);
+            $request->image_kegiatan->storeAs('public/media/kegiatan/thumbnails', $image_name);
             $validateData['image_kegiatan'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];

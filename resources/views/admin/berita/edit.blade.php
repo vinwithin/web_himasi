@@ -32,8 +32,8 @@
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="file" class="form-control @error('image_berita') is-invalid @enderror" id="image_berita"
-                    name="image_berita" accept="jpg,png" >
+                <input type="file" onchange="loadFile(event)" class="form-control @error('image_berita') is-invalid @enderror" id="image_berita"
+                    name="image_berita" accept="image/png, image/jpeg, image/jpg"  >
                 <label class="input-group-text" for="image_berita">Upload Thumbnails</label>
                 @error('image_berita')
                     <div class="invalid-feedback">
@@ -41,6 +41,7 @@
                     </div>
                 @enderror
             </div>
+            <img id="output" style="max-width: 20%"/>
             <div class="mb-3">
                 <label for="body" class="form-label">Deskripsi</label>
                 @error('body')

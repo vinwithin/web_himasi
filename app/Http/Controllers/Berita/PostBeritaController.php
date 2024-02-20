@@ -36,7 +36,7 @@ class PostBeritaController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] = Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_berita->getClientOriginalName();
-            Storage::disk('public')->put('media/berita/' . $image_name, $request->image_berita);
+            $request->image_berita->storeAs('public/media/berita/thumbnails', $image_name);
             $validateData['image_berita'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];
@@ -79,6 +79,7 @@ class PostBeritaController extends Controller
                 }
             }
         }
+        unlink("storage/media/berita/thumbnails/".$berita->image_berita);
         Berita::where('id', $berita->id)->delete();
         return redirect('/berita')->with('success', 'Berita Berhasil Dihapus!');
     }
@@ -102,7 +103,7 @@ class PostBeritaController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_berita->getClientOriginalName();
-            Storage::disk('public')->put('media/berita/' . $image_name, $request->image_berita);
+            $request->image_berita->storeAs('public/media/berita/thumbnails', $image_name);
             $validateData['image_berita'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];

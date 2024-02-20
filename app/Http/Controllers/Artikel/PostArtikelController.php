@@ -37,7 +37,7 @@ class PostArtikelController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_artikel->getClientOriginalName();
-            Storage::disk('public')->put('media/artikel/' . $image_name, $request->image_artikel);
+            $request->image_artikel->storeAs('public/media/artikel/thumbnails', $image_name);
             $validateData['image_artikel'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];
@@ -80,6 +80,7 @@ class PostArtikelController extends Controller
                 }
             }
         }
+        unlink("storage/media/artikel/thumbnails/".$artikel->image_artikel);
         Artikel::where('id', $artikel->id)->delete();
         return redirect('/artikel')->with('success', 'Artikel Berhasil Dihapus!');
     }
@@ -102,7 +103,7 @@ class PostArtikelController extends Controller
             $validateData["slug"] = Str::slug($request->title, '-');
             $validateData["excerpt"] =  Str::limit(strip_tags($request->body), 300);
             $image_name = time() . '_' . $request->image_artikel->getClientOriginalName();
-            Storage::disk('public')->put('media/artikel/' . $image_name, $request->image_artikel);
+            $request->image_artikel->storeAs('public/media/artikel/thumbnails', $image_name);
             $validateData['image_artikel'] = $image_name;
             preg_match_all('/data:image[^>]+=/i', $validateData['body'], $matches);
             $imageTags = $matches[0];

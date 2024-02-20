@@ -10,6 +10,11 @@ use App\Http\Controllers\Berita\PostBeritaController;
 use App\Http\Controllers\Kegiatan\PostKegiatanController;
 use App\Http\Controllers\Auth\regisController;
 use App\Http\Controllers\Auth\forgotPassword;
+use App\Http\Controllers\guest\aboutController;
+use App\Http\Controllers\guest\berandaController;
+use App\Http\Controllers\guest\guestArtikelController;
+use App\Http\Controllers\guest\guestBeritaController ;
+use App\Http\Controllers\guest\guestKegiatanController;
 use App\Http\Controllers\profilController;
 use App\Http\Controllers\Superadmin\masterController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +32,8 @@ use Illuminate\Support\Facades\Route;
 
 //Route Berita
 Route::middleware('auth')->group(function (){
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/dashboard', [HomeController::class, 'index']);
+    Route::get('/beranda', [berandaController::class, "index"]);
     Route::get('/profil', [profilController::class, 'index']);
     Route::post('/profil/ubah-password', [profilController::class, 'update']);
 
@@ -73,7 +79,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/master/hapus/{id}', [masterController::class, 'index']); 
 });
 
-//Route Tamu 
+//Route Admin Auth
 Route::middleware('guest')->group(function(){
     Route::get('/login', [loginController::class, 'index'])->name('login');
     Route::post('/login', [loginController::class, 'login'])->middleware('throttle:login');
@@ -86,5 +92,13 @@ Route::middleware('guest')->group(function(){
     Route::post('/reset-password', [forgotPassword::class, 'update']);
 
 });
+
+// Route Guest
+
+    Route::get('/', [berandaController::class, "index"]);
+    Route::get('/about', [aboutController::class, "index"]);
+    Route::get('/news', [guestBeritaController::class, "index"]);
+    Route::get('/articles', [guestArtikelController::class, "index"]);
+    Route::get('/events', [guestKegiatanController::class, "index"]);
 
 
