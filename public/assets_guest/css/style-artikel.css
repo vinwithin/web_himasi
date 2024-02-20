@@ -509,3 +509,15 @@
   color: #a5c5fe;
   font-size: 14px;
 }
+.image.image_resized {
+  max-width: 100%;
+  display: block;
+}
+.image.image_resized img {
+  width: 100%;
+  height: 100%;
+  text-align:center;
+}
+.image {
+  margin: auto;
+}

@@ -14,4 +14,9 @@ class guestKegiatanController extends Controller
 
         ]);
     }
+    public function show(Kegiatan $kegiatan){
+        return view('guest/kegiatan/detail', [
+            'kegiatan' => $kegiatan->load('user'), 
+        ]);
+    }
 }

@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('artikel')
     <div class="card p-4 ">
         <h1>{{ $artikel->title }}</h1>

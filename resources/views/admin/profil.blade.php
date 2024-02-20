@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('profil')
     <div class="container mt-5 ">
         <div class="card-header">

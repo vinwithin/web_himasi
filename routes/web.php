@@ -98,7 +98,10 @@ Route::middleware('guest')->group(function(){
     Route::get('/', [berandaController::class, "index"]);
     Route::get('/about', [aboutController::class, "index"]);
     Route::get('/news', [guestBeritaController::class, "index"]);
+    Route::get('/news/{berita:slug}', [guestBeritaController::class, "show"]);
     Route::get('/articles', [guestArtikelController::class, "index"]);
+    Route::get('/articles/{artikel:slug}', [guestArtikelController::class, "show"]);
     Route::get('/events', [guestKegiatanController::class, "index"]);
+    Route::get('/events/{kegiatan:slug}', [guestKegiatanController::class, "show"]);
 
 

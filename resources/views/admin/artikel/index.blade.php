@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('artikel')
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">

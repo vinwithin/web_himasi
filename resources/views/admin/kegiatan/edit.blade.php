@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('kegiatan')
     <h1 class="text-dark fs-3 mb-4">Buat Kegiatan</h1>
     @if (session()->has('error'))

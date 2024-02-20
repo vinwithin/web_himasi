@@ -14,4 +14,9 @@ class guestArtikelController extends Controller
 
         ]);
     }
+    public function show(Artikel $artikel){
+        return view('guest/artikel/detail', [
+            'artikel' => $artikel->load('category_artikel', 'user'), 
+        ]);
+    }
 }

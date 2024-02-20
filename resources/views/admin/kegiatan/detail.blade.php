@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('kegiatan')
 <div class="card p-4 shadow">
     <h1>{{ $kegiatan->title }}</h1>

@@ -31,7 +31,7 @@
                                 {{$item->excerpt}}
                             </p>
                             <div class="read-more">
-                                <a href="blog-single.html">Read More</a>
+                                <a href="/articles/{{$item->slug}}">Read More</a>
                             </div>
                         </div>
 

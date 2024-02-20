@@ -24,7 +24,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('layout/sidebar')
+        @include('admin/layout/sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -34,7 +34,7 @@
             <div id="content" style="background-color: #edeef0">
 
                 <!-- Topbar -->
-                @include('layout/navbar')
+                @include('admin/layout/navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -84,7 +84,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('layout/footer')
+            @include('admin/layout/footer')
             <!-- End of Footer -->
 
         </div>

@@ -8,7 +8,7 @@
             </div>
             <div class="row">
               
-                <div class="col-lg-8 entries">
+                <div class="col-lg-10 entries">
                   @foreach ($kegiatan as $item)
                     <article class="entry">
                         <div class="entry-img">
@@ -30,7 +30,7 @@
                                 {{$item->excerpt}}
                             </p>
                             <div class="read-more">
-                                <a href="blog-single.html">Read More</a>
+                                <a href="/events/{{$item->slug}}">Read More</a>
                             </div>
                         </div>
 
@@ -46,27 +46,7 @@
                     <!-- END PAGINATION -->
                 </div><!-- End blog entries list -->
 
-                <div class="col-lg-4">
-
-                    <div class="sidebar">
-
-                        <h3 class="sidebar-title">Categories</h3>
-                        <div class="sidebar-item categories">
-                            <ul>
-                                <!-- KATEGORI -->
-                                <li><a href="#">Berita <span>(25)</span></a></li>
-                                <li><a href="#">Himasi Apresiasi <span>(12)</span></a></li>
-                                <li><a href="#">Kampus Merdeka <span>(5)</span></a></li>
-                                <li><a href="#">Event HIMASI <span>(22)</span></a></li>
-                                <!-- END KATEGORI -->
-                            </ul>
-                        </div><!-- End sidebar categories-->
-
-                       
-
-                        </div><!-- End sidebar recent posts-->
-                    </div><!-- End sidebar -->
-                </div><!-- End blog sidebar -->
+            <!-- End blog sidebar -->
             </div>
 
         </div>

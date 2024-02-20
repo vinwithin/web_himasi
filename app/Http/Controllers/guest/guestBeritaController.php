@@ -16,4 +16,11 @@ class guestBeritaController extends Controller
             
         ]);
     }
+    public function show(Berita $berita){
+        return view('guest/berita/detail', [
+            'berita' => $berita->load('category_berita', 'user'),
+           
+            
+        ]);
+    }
 }

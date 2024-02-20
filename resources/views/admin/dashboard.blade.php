@@ -1,4 +1,4 @@
-@extends('layout/index')
+@extends('admin/layout/index')
 @section('dashboard')
     <div class="row">
         <div class="col-sm-4">
