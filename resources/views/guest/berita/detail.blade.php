@@ -50,14 +50,14 @@
         
                   <h3 class="sidebar-title">Categories</h3>
                   <div class="sidebar-item categories">
+                    @foreach ($category_berita as $category)
                     <ul>
                       <!-- KATEGORI -->
-                      <li><a href="#">Berita <span>(25)</span></a></li>
-                      <li><a href="#">Himasi Apresiasi <span>(12)</span></a></li>
-                      <li><a href="#">Kampus Merdeka <span>(5)</span></a></li>
-                      <li><a href="#">Event HIMASI <span>(22)</span></a></li>
+                      <li><a href="#">{{$category->name}} <span>({{count($category->berita)}})</span></a></li>
+                      
                       <!-- END KATEGORI -->
-                    </ul>
+                    </ul>                  
+                    @endforeach
                   </div><!-- End sidebar categories-->
                 </div><!-- End sidebar -->
               </div><!-- End blog sidebar -->
